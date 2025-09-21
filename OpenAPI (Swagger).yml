@@ -1,0 +1,382 @@
+swagger: '2.0'
+info:
+  title: EngageSphere API
+  version: 1.0.0
+  description: API Gateway configuration for EngageSphere serverless backend
+host: YOUR_API_GATEWAY_HOST  # Replace with your API Gateway URL
+basePath: /
+schemes:
+  - https
+securityDefinitions:
+  bearerAuth:
+    type: apiKey
+    name: Authorization
+    in: header
+  apiKeyAuth:
+    type: apiKey
+    name: x-api-key
+    in: header
+paths:
+  /users:
+    get:
+      summary: List users
+      operationId: listUsers
+      responses:
+        200:
+          description: List of users
+    post:
+      summary: Create a user
+      operationId: createUser
+      parameters:
+        - in: body
+          name: user
+          description: User data
+          schema:
+            $ref: '#/definitions/User'
+      responses:
+        200:
+          description: Created user
+
+  /campaigns:
+    get:
+      summary: List campaigns
+      operationId: listCampaigns
+      responses:
+        200:
+          description: List of campaigns
+    post:
+      summary: Create a campaign
+      operationId: createCampaign
+      parameters:
+        - in: body
+          name: campaign
+          description: Campaign data
+          schema:
+            $ref: '#/definitions/Campaign'
+      responses:
+        200:
+          description: Created campaign
+
+  /engagement:
+    post:
+      summary: Log engagement event
+      operationId: logEngagement
+      parameters:
+        - in: body
+          name: engagement
+          description: Engagement data
+          schema:
+            type: object
+            additionalProperties: true
+      responses:
+        200:
+          description: Engagement logged
+
+  /metrics:
+    get:
+      summary: Get metrics
+      operationId: getMetrics
+      responses:
+        200:
+          description: Metrics data
+
+  /api/stream/start:
+    post:
+      summary: Trigger multi-platform streaming on supported platforms
+      description: |
+        Starts a live stream on the specified platform. Can be called repeatedly for all supported platforms.
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/StreamStartRequest'
+      responses:
+        200:
+          description: Stream started successfully
+          schema:
+            $ref: '#/definitions/StreamStartResponse'
+        400:
+          description: Invalid request or unsupported platform
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        500:
+          description: Server error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /api/integrate/{platform}:
+    post:
+      summary: Integrate with a live platform (e.g., Agora)
+      description: |
+        Integrates with a supported live platform. For real integration, use 'agora' as the platform.
+      parameters:
+        - in: path
+          name: platform
+          required: true
+          type: string
+          enum:
+            - agora
+          description: The platform to integrate with (currently only 'agora' is supported)
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            properties:
+              payload:
+                type: object
+                description: Platform-specific payload
+      responses:
+        200:
+          description: Integration successful
+          schema:
+            type: object
+        400:
+          description: Unsupported platform or bad request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        500:
+          description: Integration/server error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /api/ai/personalize:
+    post:
+      security:
+        - bearerAuth: []
+      summary: AI-powered personalization (Azure OpenAI or Vertex AI)
+      description: |
+        Generates personalized marketing content using AI. Specify provider as 'azure' (default) or 'vertex'.
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            properties:
+              prompt:
+                type: string
+                description: The prompt or context for personalization
+              provider:
+                type: string
+                enum:
+                  - azure
+                  - vertex
+                description: AI provider to use (optional, default: azure)
+      responses:
+        200:
+          description: AI-generated personalization result
+          schema:
+            type: object
+        500:
+          description: AI service/server error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /api/ai/sentiment:
+    post:
+      security:
+        - bearerAuth: []
+      summary: AI-powered sentiment analysis (Azure OpenAI or Vertex AI)
+      description: |
+        Analyzes sentiment of provided text using AI. Specify provider as 'azure' (default) or 'vertex'.
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            properties:
+              text:
+                type: string
+                description: The text to analyze
+              provider:
+                type: string
+                enum:
+                  - azure
+                  - vertex
+                description: AI provider to use (optional, default: azure)
+      responses:
+        200:
+          description: Sentiment analysis result
+          schema:
+            type: object
+        500:
+          description: AI service/server error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /api/ai/sentiment-batch:
+    post:
+      summary: Batch sentiment analysis for forum/feedback
+      description: |
+        Analyzes sentiment of an array of messages (forum or feedback) using AI/ML (Azure OpenAI or Vertex AI). Returns sentiment for each message.
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            properties:
+              texts:
+                type: array
+                items:
+                  type: string
+                description: Array of messages to analyze
+              provider:
+                type: string
+                enum:
+                  - azure
+                  - vertex
+                description: AI provider to use (optional, default: azure)
+      responses:
+        200:
+          description: Sentiment analysis results for each message
+          schema:
+            type: object
+            properties:
+              results:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    text:
+                      type: string
+                    sentiment:
+                      type: string
+        400:
+          description: Invalid request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        500:
+          description: AI service/server error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  /api/ai/behavioral-analysis:
+    post:
+      security:
+        - bearerAuth: []
+      summary: Behavioral analysis for positive conversation triggers
+      description: |
+        Analyzes forum or feedback messages to identify behavioral triggers that lead to positive conversations. Uses AI/ML (Azure OpenAI or Vertex AI).
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            properties:
+              texts:
+                type: array
+                items:
+                  type: string
+                description: Array of forum or feedback messages
+              provider:
+                type: string
+                enum:
+                  - azure
+                  - vertex
+                description: AI provider to use (optional, default: azure)
+      responses:
+        200:
+          description: Behavioral analysis result (summary and patterns)
+          schema:
+            type: object
+        400:
+          description: Invalid request
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        500:
+          description: AI service/server error
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+definitions:
+  StreamStartRequest:
+    type: object
+    required:
+      - platform
+      - channel
+      - token
+    properties:
+      platform:
+        type: string
+        description: Streaming platform
+        enum:
+          - YouTube
+          - Facebook
+          - Twitch
+          - Instagram
+          - LinkedIn
+          - Twitter (X)
+          - WeChat
+          - Kick
+          - Trovo
+          - DLive
+          - Vimeo
+          - TikTok
+          - Custom RTMP
+      channel:
+        type: string
+        description: Channel or event name
+      token:
+        type: string
+        description: Stream or authentication token
+  StreamStartResponse:
+    type: object
+    properties:
+      status:
+        type: string
+        example: started
+      platform:
+        type: string
+      channel:
+        type: string
+  ErrorResponse:
+    type: object
+    properties:
+      error:
+        type: string
+        example: Error message
+  User:
+    type: object
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      email:
+        type: string
+
+  Campaign:
+    type: object
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+    
+# --- AI/ML User Use Cases ---
+  #
+  # 1. Personalized Campaign Generation
+  #    - User (e.g., marketer) submits a campaign idea or audience description via the app UI.
+  #    - Frontend sends a POST to /api/ai/personalize with the prompt and (optionally) provider.
+  #    - Backend calls Azure OpenAI or Vertex AI, returns generated campaign content.
+  #    - User reviews and applies the AI-generated campaign in the app.
+  #
+  # 2. Sentiment Analysis of Feedback/Forum
+  #    - User (e.g., admin or analyst) selects a forum post or feedback entry in the dashboard.
+  #    - Frontend sends a POST to /api/ai/sentiment with the text and (optionally) provider.
+  #    - Backend returns sentiment result (positive/neutral/negative, or detailed analysis).
+  #    - User sees sentiment insights in the dashboard to inform engagement strategy.
+  #
+  # 3. A/B Test Copy Suggestions
+  #    - User requests AI to generate alternative headlines or ad copy for A/B testing.
+  #    - Frontend sends a POST to /api/ai/personalize with a prompt like "Suggest 3 alternative headlines for...".
+  #    - Backend returns suggestions, which user can assign to A/B test variants.
+  #
+  # 4. Gamified Engagement Prompts
+  #    - User asks AI for ideas to boost engagement (e.g., "Suggest a gamified challenge for our next campaign").
+  #    - AI returns creative engagement strategies, which user can deploy in the app.
+  #
+  # 5. Multi-Provider Flexibility
+  #    - User or admin can select AI provider (Azure or Vertex) for specific tasks, optimizing for cost, speed, or quality.
+  #    - The app backend routes requests accordingly, always keeping API keys secure.

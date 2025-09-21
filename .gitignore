@@ -1,0 +1,41 @@
+# Node
+node_modules/
+npm-debug.log
+package-lock.json
+
+# Env
+.env
+.env.local
+.env.*.local
+
+# VS Code / Visual Studio
+.vscode/
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# System
+.DS_Store
+Thumbs.db
+
+# Build
+build/
+dist/
+
+# Logs
+logs/
+*.log
+
+# Certificates
+*.p12
+*.jks
+
+# Others
+.idea/
+coverage/
+
+# Ignore Copilot/VS snapshots
+.vs/CopilotSnapshots/
+.vs/ENS/

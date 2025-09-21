@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>EngageSphere Platform</title>
+<link rel="stylesheet" href="styles.css" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header class="main-header">
+  <div class="logo-title">
+    <svg class="logo-svg" width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="24" cy="24" r="24" fill="#FF7A00"/>
+      <ellipse cx="24" cy="24" rx="16" ry="10" fill="#F4F6F8"/>
+      <ellipse cx="24" cy="24" rx="10" ry="16" fill="#0052CC" fill-opacity="0.7"/>
+      <circle cx="24" cy="24" r="6" fill="#fff"/>
+    </svg>
+    <h1 class="platform-title">EngageSphere</h1>
+  </div>
+  <nav>
+    <button onclick="showSection('dashboard')">Dashboard</button>
+    <button onclick="showSection('campaigns')">Campaigns</button>
+    <button onclick="showSection('profile')">Profile</button>
+    <button onclick="showSection('login')">Login</button>
+    <button onclick="showSection('signup')">Sign Up</button>
+    <button onclick="showSection('engagement')">Engagement</button>
+    <button onclick="showSection('liveintegration')">Live Integration</button>
+  </nav>
+</header>
+
+<main>
+  <!-- Login Form -->
+  <section id="login" class="section">
+    <h2>Login</h2>
+    <form id="loginForm" class="login-signup-form">
+      <label for="loginEmail">Email:</label>
+      <input type="email" id="loginEmail" name="loginEmail" required placeholder="Enter your email" /><br/>
+      <label for="loginPassword">Password:</label>
+      <input type="password" id="loginPassword" name="loginPassword" required placeholder="Enter your password" /><br/>
+      <button type="submit">Login</button>
+    </form>
+  </section>
+
+  <!-- Sign Up Form -->
+  <section id="signup" class="section">
+    <h2>Sign Up</h2>
+    <form id="signupForm" class="login-signup-form">
+      <label for="signupName">Name:</label>
+      <input type="text" id="signupName" name="signupName" required placeholder="Enter your name" /><br/>
+      <label for="signupEmail">Email:</label>
+      <input type="email" id="signupEmail" name="signupEmail" required placeholder="Enter your email" /><br/>
+      <label for="signupPassword">Password:</label>
+      <input type="password" id="signupPassword" name="signupPassword" required placeholder="Create a password" /><br/>
+      <button type="submit">Register</button>
+    </form>
+  </section>
+
+  <!-- Dashboard -->
+  <section id="dashboard" class="section">
+  <h2>Dashboard & Metrics</h2>
+  <p>Number of campaigns: <span id="campaignCount">0</span></p>
+  <p>Active users: <span id="activeUsers">0</span></p>
+  </section>
+
+  <!-- Campaigns -->
+  <section id="campaigns" class="section">
+    <h2>Campaign Management</h2>
+    <form id="campaignForm">
+      <label for="campaignName">Campaign Name:</label>
+      <input type="text" id="campaignName" name="campaignName" required placeholder="Enter campaign name" />
+      <button type="submit">Create Campaign</button>
+    </form>
+    <ul id="campaignList"></ul>
+  </section>
+
+  <!-- Profile -->
+  <section id="profile" class="section">
+    <h2>User Profile</h2>
+    <form id="profileForm">
+      <label for="userName">Name:</label>
+      <input type="text" id="userName" name="userName" required placeholder="Enter your name" /><br/>
+      <label for="userEmail">Email:</label>
+      <input type="email" id="userEmail" name="userEmail" required placeholder="Enter your email" /><br/>
+      <button type="submit">Update Profile</button>
+    </form>
+  </section>
+
+  <!-- Engagement Logging -->
+  <section id="engagement" class="section">
+  <h2>Engagement Tracking</h2>
+  <button onclick="logEngagement()">Log Interaction</button>
+  </section>
+
+  <!-- Live Integration -->
+  <section id="liveintegration" class="section">
+    <h2>Live Platform Integration (Agora)</h2>
+    <label for="platformSelect">Platform:</label>
+    <select id="platformSelect" name="platformSelect" title="Choose Platform">
+      <option value="agora">Agora</option>
+    </select>
+    <button id="integrateBtn">Integrate</button>
+    <div id="integrationResult"></div>
+  </section>
+</main>
+
+<script src="script.js"></script>
+<footer>
+  <p>&copy; 2024 Ken's Digital Hub. All rights reserved. EngageSphere is protected by copyright, trademark, and patent law.</p>
+</footer>
+</body>
+</html>

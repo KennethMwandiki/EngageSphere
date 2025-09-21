@@ -1,0 +1,737 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EngageSphere Platform</title>
+        <link rel="stylesheet" href="styles.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+        <header style="background:#0052CC; color:#fff; padding:1.5em 1em; display:flex; align-items:center; justify-content:space-between;">
+                <div style="display:flex; align-items:center;">
+                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-right:16px;">
+                        <circle cx="24" cy="24" r="24" fill="#FF7A00"/>
+                        <ellipse cx="24" cy="24" rx="16" ry="10" fill="#F4F6F8"/>
+                        <ellipse cx="24" cy="24" rx="10" ry="16" fill="#0052CC" fill-opacity="0.7"/>
+                        <circle cx="24" cy="24" r="6" fill="#fff"/>
+                    </svg>
+                        <h1 class="platform-title">EngageSphere</h1>
+                </div>
+                <nav>
+            <button onclick="showSection('dashboard')">Dashboard</button>
+            <button onclick="showSection('campaigns')">Campaigns</button>
+            <button onclick="showSection('profile')">Profile</button>
+            <button onclick="showSection('forum')">Forum</button>
+            <button onclick="showSection('talent')">Talent</button>
+            <button onclick="showSection('cocreation')">Co-Creation</button>
+            <button onclick="showSection('live')">Live Interaction</button>
+            <button onclick="showSection('behavioral')">Behavioral Insights</button>
+            <button onclick="showSection('multistream')">Multi-Platform Streaming</button>
+            <button onclick="showSection('login')">Login</button>
+            <button onclick="showSection('signup')">Sign Up</button>
+            <button onclick="showSection('engagement')">Engagement</button>
+            <button onclick="showSection('language')">Language</button>
+        </nav>
+        <!-- Accessibility controls: Captions and Narration -->
+        <div style="display:flex;align-items:center;gap:0.5em;margin-left:12px;">
+            <label for="captionsToggle" style="color:#fff;">Captions</label>
+            <input type="checkbox" id="captionsToggle" aria-label="Toggle live captions" />
+            <button id="narrateBtn" style="margin-left:8px;">Narrate Selection</button>
+        </div>
+    </header>
+    <main>
+        <!-- Behavioral Insights Dashboard -->
+        <section id="behavioral" class="section">
+            <h2>Behavioral Insights <span class="tooltip" title="AI-powered analysis of community conversations">?</span></h2>
+            <form id="behavioralForm">
+                <label for="insightSource">Source:</label>
+                <select id="insightSource" name="insightSource">
+                    <option value="forum">Forum Posts</option>
+                    <option value="feedback">Feedback</option>
+                </select>
+                <label for="providerSelect">AI Provider:</label>
+                <select id="providerSelect" name="providerSelect">
+                    <option value="azure">Azure OpenAI</option>
+                    <option value="vertex">Vertex AI</option>
+                    <option value="gpt-5-mini">GPT-5 mini</option>
+                </select>
+                <button type="submit">Analyze Behavioral Triggers</button>
+            </form>
+            <div id="behavioralLoading" class="loading-bar">Analyzing... <span class="spinner"></span></div>
+            <div id="behavioralResult" class="ai-result"></div>
+            <hr class="section-divider">
+            <h3>Real-Time Sentiment Analysis <span class="tooltip" title="Gauge audience mood in real time">?</span></h3>
+            <form id="sentimentForm">
+                <label for="sentimentSource">Source:</label>
+                <select id="sentimentSource" name="sentimentSource">
+                    <option value="forum">Forum Posts</option>
+                    <option value="feedback">Feedback</option>
+                </select>
+                <label for="sentimentProvider">AI Provider:</label>
+                <select id="sentimentProvider" name="sentimentProvider">
+                    <option value="azure">Azure OpenAI</option>
+                    <option value="vertex">Vertex AI</option>
+                    <option value="gpt-5-mini">GPT-5 mini</option>
+                </select>
+                <button type="submit">Analyze Sentiment</button>
+                <button type="button" id="exportSentimentBtn" class="ml-1em">Export CSV</button>
+            </form>
+            <div id="sentimentLoading" class="loading-bar">Analyzing... <span class="spinner"></span></div>
+            <div id="sentimentSummaryBar" class="summary-bar"></div>
+            <div id="sentimentResult" class="ai-result"></div>
+            <canvas id="sentimentChart" width="400" height="180" class="mt-1em"></canvas>
+            <canvas id="sentimentTrendChart" width="400" height="120" class="mt-2em"></canvas>
+        </section>
+        <!-- Multi-Platform Streaming -->
+        <section id="multistream" class="section">
+            <h2>Multi-Platform Streaming Trigger</h2>
+            <form id="multistreamForm">
+                <label for="streamChannel">Channel/Event Name:</label>
+                <input type="text" id="streamChannel" name="streamChannel" required placeholder="Enter channel or event name" />
+                <label for="streamToken">Stream/Auth Token:</label>
+                <input type="text" id="streamToken" name="streamToken" required placeholder="Enter stream or auth token" />
+                <button type="submit">Start Streaming on All Platforms</button>
+            </form>
+            <div id="multistreamResult"></div>
+            <div class="info-note">
+                Supported platforms: YouTube, Facebook, Twitch, Instagram, LinkedIn, Twitter (X), WeChat, Kick, Trovo, DLive, Vimeo, TikTok, Custom RTMP
+            </div>
+        </section>
+        <!-- Dashboard Analytics -->
+    <section id="dashboard" class="section">
+            <h2>Dashboard & Market Analytics</h2>
+            <canvas id="marketChart" width="400" height="200"></canvas>
+            <canvas id="sentimentChart" width="400" height="200"></canvas>
+            <p>Number of campaigns: <span id="campaignCount">0</span></p>
+            <p>Active users: <span id="activeUsers">0</span></p>
+        </section>
+        <!-- Forum -->
+    <section id="forum" class="section">
+            <h2>Collaboration Forum</h2>
+            <div id="forumPosts"></div>
+            <form id="forumForm">
+                <input type="text" id="forumInput" placeholder="Share an idea..." required />
+                <button type="submit">Post</button>
+            </form>
+        </section>
+        <!-- Talent Engagement -->
+    <section id="talent" class="section">
+            <h2>Talent Engagement</h2>
+            <form id="talentForm">
+                    <label for="talentName">Name:</label>
+                Name: <input type="text" id="talentName" required />
+                    <label for="talentSkills">Skills:</label>
+                Skills: <input type="text" id="talentSkills" required />
+                <button type="submit">Apply</button>
+            </form>
+            <ul id="talentList"></ul>
+        </section>
+        <!-- Co-Creation -->
+    <section id="cocreation" class="section">
+            <h2>Co-Creation & Feedback</h2>
+            <form id="feedbackForm">
+                <textarea id="feedbackInput" placeholder="Your feedback..." required></textarea>
+                <button type="submit">Submit Feedback</button>
+            </form>
+            <ul id="feedbackList"></ul>
+        </section>
+        <!-- Live Integration (Agora/Platform) -->
+    <section id="live" class="section">
+            <h2>Live Platform Integration (Agora & External)</h2>
+            <form id="agoraForm">
+                <label for="platformSelectProto">Platform:</label>
+                <select id="platformSelectProto" name="platformSelectProto" title="Choose Platform">
+                    <option value="agora">Agora</option>
+                </select>
+                <button id="integrateBtnProto">Integrate</button>
+            </form>
+            <div id="integrationResultProto"></div>
+            <hr class="section-divider">
+            <h3>Join External Live Platform</h3>
+            <form id="externalLiveForm">
+                <label for="externalLiveSelect">Choose Platform:</label>
+                <select id="externalLiveSelect" name="externalLiveSelect">
+                    <option value="zoom">Zoom</option>
+                    <option value="vm">VM</option>
+                    <option value="innchat">InnChat</option>
+                    <option value="teams">Microsoft Teams</option>
+                    <option value="googlemeet">Google Meet</option>
+                    <option value="whatsapp">WhatsApp</option>
+                </select>
+                <div id="googleApiOptions" style="display:none; margin-top:0.5em;">
+                    <label><input type="checkbox" class="google-scope" value="calendar" checked> Calendar</label>
+                    <label><input type="checkbox" class="google-scope" value="drive"> Drive</label>
+                    <label><input type="checkbox" class="google-scope" value="contacts"> Contacts</label>
+                    <label><input type="checkbox" class="google-scope" value="gmail"> Gmail</label>
+                    <label style="margin-left:1em;">Platform:
+                        <select id="googlePlatformSelect">
+                            <option value="web">Web</option>
+                            <option value="android">Android</option>
+                            <option value="ios">iOS</option>
+                            <option value="desktop">Desktop</option>
+                        </select>
+                    </label>
+                </div>
+                <button type="submit">Start/Join</button>
+                <button type="button" id="zoomAuthBtn" style="display:none;margin-left:1em;">Authorize Zoom</button>
+                <button type="button" id="googleAuthBtn" style="display:none;margin-left:1em;">Authorize Google</button>
+            </form>
+            <div id="externalLiveResult" class="ai-result"></div>
+            <div id="captionsContainer" class="admin-result" aria-live="polite" style="display:none;margin-top:0.5em; background:#111;color:#fff;padding:8px;border-radius:6px;">Captions will appear here when enabled.</div>
+        </section>
+        <!-- Login Form (replaces old login section) -->
+    <section id="login" class="section">
+            <h2>Login</h2>
+            <form id="loginForm" class="login-signup-form">
+                <label for="loginUsername">Username:</label>
+                <input type="text" id="loginUsername" name="loginUsername" required placeholder="Enter your username" /><br/>
+                <label for="loginPassword">Password:</label>
+                <input type="password" id="loginPassword" name="loginPassword" required placeholder="Enter your password" /><br/>
+                <button type="submit">Login</button>
+            </form>
+            <div id="loginResult"></div>
+            <button id="logoutBtn" class="logout-btn">Logout</button>
+        </section>
+        <!-- Sign Up Form -->
+    <section id="signup" class="section">
+            <h2>Sign Up</h2>
+            <form id="signupForm" class="login-signup-form">
+                    <label for="signupName">Name:</label>
+                    <input type="text" id="signupName" name="signupName" required placeholder="Enter your name" /><br />
+                    <label for="signupEmail">Email:</label>
+                    <input type="email" id="signupEmail" name="signupEmail" required placeholder="Enter your email" /><br />
+                    <label for="signupPassword">Password:</label>
+                    <input type="password" id="signupPassword" name="signupPassword" required placeholder="Create a password" /><br />
+                <button type="submit">Register</button>
+            </form>
+        </section>
+        <!-- Campaigns -->
+    <section id="campaigns" class="section">
+            <h2>Campaign Management</h2>
+            <form id="campaignForm">
+                    <label for="campaignName">Campaign Name:</label>
+                    <input type="text" id="campaignName" name="campaignName" required placeholder="Enter campaign name" />
+                <button type="submit">Create Campaign</button>
+            </form>
+            <ul id="campaignList"></ul>
+            <div id="abTest">
+                <h3>A/B Testing</h3>
+                <button onclick="runABTest()">Run A/B Test</button>
+                <div id="abTestResult"></div>
+            </div>
+        </section>
+        <!-- Profile -->
+    <section id="profile" class="section">
+            <h2>User Profile</h2>
+            <form id="profileForm">
+                    <label for="userName">Name:</label>
+                    <input type="text" id="userName" name="userName" required placeholder="Enter your name" /><br />
+                    <label for="userEmail">Email:</label>
+                    <input type="email" id="userEmail" name="userEmail" required placeholder="Enter your email" /><br />
+                <button type="submit">Update Profile</button>
+            </form>
+        </section>
+        <!-- Engagement Logging -->
+    <section id="engagement" class="section">
+            <h2>Engagement Tracking</h2>
+            <button onclick="logEngagement()">Log Interaction</button>
+        </section>
+        <!-- Admin Health (admin-only) -->
+                        <section id="admin" class="section hidden">
+                        <h2>Admin: Provider Key Health</h2>
+                        <div class="admin-section">
+                                    <button id="fetchHealthBtn">Check Key Status</button>
+                                    <div id="healthResult" class="admin-result"></div>
+                        </div>
+                </section>
+        <!-- Language Switcher -->
+    <section id="language" class="section">
+            <h2>Language</h2>
+            <label for="languageSelect">Choose Language:</label>
+            <select id="languageSelect" name="languageSelect" title="Choose Language">
+                <option value="en">English</option>
+                <option value="fr">French</option>
+                <option value="es">Spanish</option>
+                <option value="zh">Chinese</option>
+            </select>
+            <button onclick="setLanguage()">Set Language</button>
+        </section>
+        <!-- Legal Notice -->
+        <footer>
+            <p>&copy; 2024 Ken's Digital Hub. All rights reserved. EngageSphere is protected by copyright, trademark, and patent law.</p>
+        </footer>
+    </main>
+        <script type="module">
+        // --- Admin Health Section ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const adminSection = document.getElementById('admin');
+            const fetchHealthBtn = document.getElementById('fetchHealthBtn');
+            const healthResult = document.getElementById('healthResult');
+            // Show admin section if user is admin
+            const role = localStorage.getItem('userRole');
+            if (role === 'admin') adminSection.classList.remove('hidden');
+            if (fetchHealthBtn) {
+                fetchHealthBtn.onclick = async function() {
+                    // quick auth check
+                    const token = localStorage.getItem('authToken');
+                    if (!token) {
+                        healthResult.innerHTML = '<div class="muted">Not authenticated. Set an admin JWT in localStorage under <code>authToken</code>.</div>';
+                        return;
+                    }
+                    fetchHealthBtn.disabled = true;
+                    healthResult.innerHTML = '<span class="spinner"></span> Checking...';
+                    try {
+                        const res = await fetch('/api/admin/health', {
+                            headers: { 'Authorization': `Bearer ${token}` }
+                        });
+                        const data = await res.json();
+                        if (!res.ok) throw new Error(data.error || 'Not authorized');
+                        let html = '<table><tr><th>Key</th><th>Configured</th></tr>';
+                        for (const k of Object.keys(data)) {
+                            if (k === 'timestamp' || k === 'NODE_ENV') continue;
+                            const badge = data[k] ? '<span class="admin-badge-yes">✅</span>' : '<span class="admin-badge-no">❌</span>';
+                            html += `<tr><td>${k}</td><td>${badge}</td></tr>`;
+                        }
+                        html += '</table>';
+                        html += `<div class="muted">Checked at: ${data.timestamp} (${data.NODE_ENV})</div>`;
+                        healthResult.innerHTML = html;
+                    } catch (err) {
+                        healthResult.innerHTML = '<div class="muted">Error: ' + err.message + '</div>';
+                    } finally {
+                        fetchHealthBtn.disabled = false;
+                    }
+                };
+            }
+        });
+        // --- Secure authentication check (simple demo) ---
+        function isAuthenticated() {
+            // Replace with real authentication logic (JWT, session, etc.)
+            return !!localStorage.getItem('authToken');
+        }
+        // Hide behavioral section if not authenticated
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(s => s.style.display='none');
+            if (sectionId === 'behavioral' && !isAuthenticated()) {
+                alert('You must be logged in as an admin or user to access Behavioral Insights.');
+                return;
+            }
+            document.getElementById(sectionId).style.display='block';
+        }
+
+        // --- Behavioral Insights logic ---
+        document.getElementById('behavioralForm').onsubmit = async function(e) {
+            e.preventDefault();
+            const source = document.getElementById('insightSource').value;
+            const provider = document.getElementById('providerSelect').value;
+            const resultDiv = document.getElementById('behavioralResult');
+            resultDiv.innerText = 'Analyzing...';
+            // Fetch messages from backend
+            let messages = [];
+            try {
+                const res = await fetch(`/api/${source}`);
+                messages = await res.json();
+                if (Array.isArray(messages) && messages.length > 0 && messages[0].text) {
+                    messages = messages.map(m => m.text);
+                }
+            } catch (err) {
+                resultDiv.innerText = 'Failed to fetch messages.';
+                return;
+            }
+            // Call behavioral analysis endpoint
+            try {
+                const token = localStorage.getItem('authToken');
+                const res = await fetch('/api/ai/behavioral-analysis', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        ...(token ? { 'Authorization': `Bearer ${token}` } : {})
+                    },
+                    body: JSON.stringify({ texts: messages, provider })
+                });
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.error || 'Unknown error');
+                // Try to display summary/insights from AI response
+                resultDiv.innerText = data.choices?.[0]?.message?.content || data.predictions?.[0]?.content || JSON.stringify(data, null, 2);
+            } catch (err) {
+                resultDiv.innerText = 'Analysis failed: ' + err.message;
+            }
+        };
+        // Multi-platform streaming trigger logic
+        document.getElementById('multistreamForm').onsubmit = async function(e) {
+            e.preventDefault();
+            const channel = document.getElementById('streamChannel').value;
+            const token = document.getElementById('streamToken').value;
+            const resultDiv = document.getElementById('multistreamResult');
+            resultDiv.innerText = 'Triggering streams...';
+            const platforms = [
+                'YouTube','Facebook','Twitch','Instagram','LinkedIn','Twitter (X)','WeChat','Kick','Trovo','DLive','Vimeo','TikTok','Custom RTMP'
+            ];
+            let allSuccess = true;
+            for (const platform of platforms) {
+                try {
+                    const res = await fetch('/api/stream/start', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ platform, channel, token })
+                    });
+                    const data = await res.json();
+                    if (!res.ok) throw new Error(data.error || 'Unknown error');
+                    resultDiv.innerText += `\nStarted stream on ${platform}: ${data.status}`;
+                } catch (err) {
+                    allSuccess = false;
+                    resultDiv.innerText += `\nFailed to start stream on ${platform}: ${err.message}`;
+                }
+            }
+            if (allSuccess) {
+                resultDiv.style.color = '#0052CC';
+            } else {
+                resultDiv.style.color = '#f44336';
+            }
+        };
+            import { integrateWithPlatform } from './frontend/api.js';
+            async function handleIntegrationProto(platform, data) {
+                try {
+                    const result = await integrateWithPlatform(platform, data);
+                    document.getElementById('integrationResultProto').innerText = `Integration with ${platform} successful!`;
+                } catch (err) {
+                    document.getElementById('integrationResultProto').innerText = `Integration failed: ${err.message}`;
+                }
+            }
+            const btn = document.getElementById('integrateBtnProto');
+            if (btn) {
+                btn.onclick = () => {
+                    const platform = document.getElementById('platformSelectProto').value;
+                    const payload = { message: "Test integration" };
+                    document.getElementById('integrationResultProto').innerText = 'Integrating...';
+                    handleIntegrationProto(platform, payload);
+                };
+            }
+        // --- Login/Logout logic ---
+        const loginForm = document.getElementById('loginForm');
+        const loginResult = document.getElementById('loginResult');
+        const logoutBtn = document.getElementById('logoutBtn');
+
+        function updateLoginUI() {
+            if (localStorage.getItem('authToken')) {
+                loginForm.style.display = 'none';
+                logoutBtn.style.display = 'block';
+                loginResult.innerText = 'Logged in.';
+            } else {
+                loginForm.style.display = 'block';
+                logoutBtn.style.display = 'none';
+                loginResult.innerText = '';
+            }
+        }
+
+        loginForm.onsubmit = async function(e) {
+            e.preventDefault();
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+            loginResult.innerText = 'Logging in...';
+            try {
+                const res = await fetch('/api/auth/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password })
+                });
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.error || 'Login failed');
+                localStorage.setItem('authToken', data.token);
+                localStorage.setItem('userRole', data.role);
+                updateLoginUI();
+            } catch (err) {
+                loginResult.innerText = 'Login failed: ' + err.message;
+            }
+        };
+
+        logoutBtn.onclick = function() {
+            localStorage.removeItem('authToken');
+            localStorage.removeItem('userRole');
+            updateLoginUI();
+        };
+
+        updateLoginUI();
+        // --- Real-Time Sentiment Analysis logic (polished UI) ---
+        const sentimentForm = document.getElementById('sentimentForm');
+        const sentimentLoading = document.getElementById('sentimentLoading');
+        const sentimentResult = document.getElementById('sentimentResult');
+        const sentimentSummaryBar = document.getElementById('sentimentSummaryBar');
+        const sentimentChart = document.getElementById('sentimentChart');
+        const sentimentTrendChart = document.getElementById('sentimentTrendChart');
+        const exportSentimentBtn = document.getElementById('exportSentimentBtn');
+
+        let sentimentTrendData = [];
+
+        sentimentForm.onsubmit = async function(e) {
+            e.preventDefault();
+            sentimentLoading.style.display = 'block';
+            sentimentResult.innerText = '';
+            sentimentSummaryBar.style.display = 'none';
+            let messages = [];
+            try {
+                const res = await fetch(`/api/${document.getElementById('sentimentSource').value}`);
+                messages = await res.json();
+                if (Array.isArray(messages) && messages.length > 0 && messages[0].text) {
+                    messages = messages.map(m => m.text);
+                }
+            } catch (err) {
+                sentimentResult.innerText = 'Failed to fetch messages.';
+                sentimentLoading.style.display = 'none';
+                return;
+            }
+            // Call batch sentiment analysis endpoint
+            let positive = 0, neutral = 0, negative = 0;
+            let details = [], trend = [];
+            try {
+                const token = localStorage.getItem('authToken');
+                const res = await fetch('/api/ai/sentiment-batch', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        ...(token ? { 'Authorization': `Bearer ${token}` } : {})
+                    },
+                    body: JSON.stringify({ texts: messages, provider: document.getElementById('sentimentProvider').value })
+                });
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.error || 'Unknown error');
+                let i = 0;
+                for (const { text, sentiment } of data.results) {
+                    let s = (sentiment || '').toLowerCase();
+                    if (s.includes('positive')) positive++;
+                    else if (s.includes('negative')) negative++;
+                    else neutral++;
+                    let color = s.includes('positive') ? '#4caf50' : s.includes('negative') ? '#f44336' : '#ffc107';
+                    details.push(`<span style="color:${color}">• ${text.slice(0, 60)}... → ${sentiment}</span>`);
+                    trend.push(s.includes('positive') ? 1 : s.includes('negative') ? -1 : 0);
+                    i++;
+                }
+                sentimentTrendData = trend;
+            } catch (err) {
+                sentimentResult.innerText = 'Analysis failed: ' + err.message;
+                sentimentLoading.style.display = 'none';
+                return;
+            }
+            // Show summary bar
+            let total = positive + neutral + negative;
+            let summary = `😊 Positive: ${positive} | 😐 Neutral: ${neutral} | 😞 Negative: ${negative}`;
+            let bg = positive >= negative && positive >= neutral ? '#e6f7ee' : negative > positive ? '#fdecea' : '#fffbe6';
+            let color = positive >= negative && positive >= neutral ? '#228b5a' : negative > positive ? '#b71c1c' : '#bfa600';
+            sentimentSummaryBar.innerText = summary;
+            sentimentSummaryBar.style.background = bg;
+            sentimentSummaryBar.style.color = color;
+            sentimentSummaryBar.style.display = 'block';
+            // Details
+            sentimentResult.innerHTML = `<b>Details:</b><br>${details.join('<br>')}`;
+            // Draw pie chart
+            if (window.Chart) {
+                if (window._sentimentChartInstance) window._sentimentChartInstance.destroy();
+                window._sentimentChartInstance = new Chart(sentimentChart.getContext('2d'), {
+                    type: 'pie',
+                    data: {
+                        labels: ['Positive', 'Neutral', 'Negative'],
+                        datasets: [{
+                            data: [positive, neutral, negative],
+                            backgroundColor: ['#4caf50','#ffc107','#f44336']
+                        }]
+                    },
+                    options: { responsive: false }
+                });
+                // Draw trend chart (line chart)
+                if (window._sentimentTrendChartInstance) window._sentimentTrendChartInstance.destroy();
+                window._sentimentTrendChartInstance = new Chart(sentimentTrendChart.getContext('2d'), {
+                    type: 'line',
+                    data: {
+                        labels: sentimentTrendData.map((_, i) => i + 1),
+                        datasets: [{
+                            label: 'Sentiment Trend',
+                            data: sentimentTrendData,
+                            borderColor: '#0052CC',
+                            backgroundColor: 'rgba(0,82,204,0.1)',
+                            fill: true,
+                            tension: 0.3,
+                            pointRadius: 2
+                        }]
+                    },
+                    options: {
+                        responsive: false,
+                        scales: {
+                            y: {
+                                min: -1,
+                                max: 1,
+                                ticks: {
+                                    callback: v => v === 1 ? 'Positive' : v === -1 ? 'Negative' : 'Neutral'
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+            sentimentLoading.style.display = 'none';
+        };
+
+        // Export sentiment results as CSV
+        exportSentimentBtn.onclick = function() {
+            let csv = 'Text,Sentiment\n';
+            const details = sentimentResult.innerText.split('\n').filter(l => l.includes('→'));
+            for (const line of details) {
+                const [text, sentiment] = line.split('→').map(s => s.trim());
+                csv += `"${text.replace('• ','').replace(/"/g,'""')}",${sentiment}\n`;
+            }
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'sentiment_results.csv';
+            a.click();
+            URL.revokeObjectURL(url);
+        };
+        // --- External Live Platform Integration logic ---
+        const externalLiveForm = document.getElementById('externalLiveForm');
+        const externalLiveResult = document.getElementById('externalLiveResult');
+        const zoomAuthBtn = document.getElementById('zoomAuthBtn');
+        const externalLiveSelect = document.getElementById('externalLiveSelect');
+
+    // Show/hide Zoom/Google Auth buttons based on selection
+    // (single handler below controls both Zoom and Google auth button visibility)
+    // Google Auth button
+    const googleApiOptions = document.getElementById('googleApiOptions');
+        const googlePlatformSelect = document.getElementById('googlePlatformSelect');
+        function updateAuthBtns() {
+            if (externalLiveSelect.value === 'zoom') {
+                zoomAuthBtn.style.display = '';
+                googleAuthBtn.style.display = 'none';
+                googleApiOptions.style.display = 'none';
+            } else if (externalLiveSelect.value === 'googlemeet') {
+                googleAuthBtn.style.display = '';
+                zoomAuthBtn.style.display = 'none';
+                googleApiOptions.style.display = '';
+            } else {
+                zoomAuthBtn.style.display = 'none';
+                googleAuthBtn.style.display = 'none';
+                googleApiOptions.style.display = 'none';
+            }
+        }
+        externalLiveSelect.addEventListener('change', updateAuthBtns);
+        updateAuthBtns();
+
+        // Zoom OAuth button click
+        zoomAuthBtn.onclick = function() {
+            window.open('/api/live/zoom/auth', '_blank');
+        };
+        // Google OAuth button click
+        googleAuthBtn.onclick = function() {
+            // Collect selected scopes and platform
+            const scopes = Array.from(document.querySelectorAll('.google-scope:checked')).map(cb => cb.value).join(',');
+            const platform = googlePlatformSelect.value;
+            window.open(`/api/live/google/auth?scope=${encodeURIComponent(scopes)}&platform=${platform}`, '_blank');
+        };
+
+    externalLiveForm.onsubmit = async function(e) {
+            e.preventDefault();
+            const platform = externalLiveSelect.value;
+            externalLiveResult.innerText = 'Connecting...';
+            try {
+                let payload = { platform };
+                // For Google, allow API feature selection
+                if (platform === 'googlemeet') {
+                    payload.scopes = Array.from(document.querySelectorAll('.google-scope:checked')).map(cb => cb.value);
+                    payload.googlePlatform = googlePlatformSelect.value;
+                }
+                const res = await fetch('/api/live/start', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const data = await res.json();
+                if (!res.ok) {
+                    // If Zoom not authorized, show auth button and message
+                    if (platform === 'zoom' && data.error && data.error.includes('authorize Zoom')) {
+                        externalLiveResult.innerHTML = 'Zoom authorization required. <button onclick="window.open(\'/api/live/zoom/auth\', \'_blank\')">Authorize Zoom</button>';
+                        return;
+                    }
+                    // If Google not authorized, show auth button and message
+                    if ((platform === 'googlemeet' || platform === 'google') && data.error && data.error.includes('authorize Google')) {
+                        externalLiveResult.innerHTML = 'Google authorization required. <button onclick="window.open(\'/api/live/google/auth?scope=' + encodeURIComponent(payload.scopes ? payload.scopes.join(',') : 'calendar') + '&platform=' + (payload.googlePlatform || 'web') + '\', \'_blank\')">Authorize Google</button>';
+                        return;
+                    }
+                    throw new Error(data.error || 'Failed to connect');
+                }
+                // Show real or simulated join link
+                externalLiveResult.innerHTML = `<b>${platform.charAt(0).toUpperCase() + platform.slice(1)}:</b> <a href="${data.joinUrl}" target="_blank">Join Meeting</a> <span class="info-note">${data.info || ''}</span>`;
+            } catch (err) {
+                externalLiveResult.innerText = 'Error: ' + err.message;
+            }
+        };
+
+        // --- Accessibility: Captions toggle and TTS narration ---
+        const captionsToggle = document.getElementById('captionsToggle');
+        const captionsContainer = document.getElementById('captionsContainer');
+        const narrateBtn = document.getElementById('narrateBtn');
+
+        // Simple captions simulation: when toggle enabled, show live captions
+        captionsToggle.addEventListener('change', () => {
+            if (captionsToggle.checked) {
+                captionsContainer.style.display = '';
+                startCaptionsSimulation();
+            } else {
+                captionsContainer.style.display = 'none';
+                stopCaptionsSimulation();
+            }
+        });
+
+        // Web Speech API narration (reads selected text or page summary)
+        function speakText(text) {
+            if (!window.speechSynthesis) {
+                alert('Speech Synthesis not supported in this browser.');
+                return;
+            }
+            window.speechSynthesis.cancel();
+            const utter = new SpeechSynthesisUtterance(text);
+            utter.lang = 'en-US';
+            utter.rate = 1.0;
+            utter.pitch = 1.0;
+            window.speechSynthesis.speak(utter);
+        }
+
+        narrateBtn.addEventListener('click', () => {
+            const sel = window.getSelection().toString().trim();
+            if (sel) {
+                speakText(sel);
+                return;
+            }
+            // Fallback: narrate the current visible section's summary
+            const visible = Array.from(document.querySelectorAll('.section')).find(s => s.style.display !== 'none');
+            const heading = visible ? visible.querySelector('h2')?.innerText || '' : '';
+            const summary = visible ? (visible.querySelector('.ai-result')?.innerText || visible.textContent.slice(0, 300)) : document.title;
+            speakText((heading ? heading + '. ' : '') + summary);
+        });
+
+        // Captions simulation (placeholder for real-time caption integration)
+        let captionsInterval = null;
+        function startCaptionsSimulation() {
+            if (captionsInterval) return;
+            const phrases = [
+                'Welcome to the live session.',
+                'Speaker: Welcome everyone to our event.',
+                'Q and A starting shortly.',
+                'Important: check the pinned resources.'
+            ];
+            let i = 0;
+            captionsContainer.innerText = phrases[i];
+            captionsInterval = setInterval(() => {
+                i = (i + 1) % phrases.length;
+                captionsContainer.innerText = phrases[i];
+            }, 4000);
+        }
+        function stopCaptionsSimulation() {
+            if (captionsInterval) clearInterval(captionsInterval);
+            captionsInterval = null;
+            captionsContainer.innerText = '';
+        }
+        </script>
+        <script src="script.js"></script>
+        <!-- Styles moved to styles.css for deployment best practices -->
+</body>
+</html>

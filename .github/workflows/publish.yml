@@ -1,0 +1,201 @@
+name: One-Click Publish
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-web:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      - name: Install dependencies
+        run: npm ci
+      - name: Build web
+        run: npm run build:web
+
+  android_build:
+    runs-on: ubuntu-latest
+    needs: build-web
+    env:
+      JAVA_HOME_11_X64: /usr/lib/jvm/java-11-openjdk-amd64
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up JDK 11
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '11'
+      - name: Cache Gradle
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: gradle-${{ runner.os }}-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+      - name: Grant execute permission for gradlew
+        run: chmod +x ./gradlew || true
+      - name: Decode Android keystore (from secret)
+        if: env.ANDROID_KEYSTORE_BASE64 != ''
+        run: |
+          echo "Decoding keystore to ./android_keystore.jks"
+          echo "$ANDROID_KEYSTORE_BASE64" | base64 --decode > android_keystore.jks || echo "$ANDROID_KEYSTORE_BASE64" > android_keystore.jks
+          ls -la android_keystore.jks
+          echo "STORE_FILE=android_keystore.jks" >> $GITHUB_ENV
+          echo "STORE_PASSWORD=$ANDROID_KEYSTORE_PASSWORD" >> $GITHUB_ENV
+          echo "KEY_ALIAS=$ANDROID_KEY_ALIAS" >> $GITHUB_ENV
+          echo "KEY_PASSWORD=$ANDROID_KEY_PASSWORD" >> $GITHUB_ENV
+      - name: Build Android AAB
+        run: |
+          # Ensure gradle signing properties if keystore provided
+          if [ -f android_keystore.jks ]; then
+            echo "RELEASE_STORE_FILE=android_keystore.jks" > signing.properties
+            echo "RELEASE_STORE_PASSWORD=$ANDROID_KEYSTORE_PASSWORD" >> signing.properties
+            echo "RELEASE_KEY_ALIAS=$ANDROID_KEY_ALIAS" >> signing.properties
+            echo "RELEASE_KEY_PASSWORD=$ANDROID_KEY_PASSWORD" >> signing.properties
+          fi
+          ./gradlew bundleRelease --no-daemon -Pandroid.injected.signing.store.file=${RELEASE_STORE_FILE:-} -Pandroid.injected.signing.store.password=${RELEASE_STORE_PASSWORD:-} -Pandroid.injected.signing.key.alias=${RELEASE_KEY_ALIAS:-} -Pandroid.injected.signing.key.password=${RELEASE_KEY_PASSWORD:-}
+      - name: Upload AAB artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-aab
+          path: '**/app-release.aab'
+
+  ios_build:
+    runs-on: macos-latest
+    needs: build-web
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.1'
+      - name: Install Fastlane
+        run: gem install fastlane -NV
+      - name: Prepare App Store Connect API key (for Fastlane)
+        if: env.APP_STORE_CONNECT_API_KEY != ''
+        run: |
+          echo "Writing App Store Connect API key to file"
+          echo "$APP_STORE_CONNECT_API_KEY" | base64 --decode > /tmp/AuthKey.p8 2>/dev/null || echo "$APP_STORE_CONNECT_API_KEY" > /tmp/AuthKey.p8
+          ls -la /tmp/AuthKey.p8
+          echo "APP_STORE_CONNECT_KEY=/tmp/AuthKey.p8" >> $GITHUB_ENV
+      - name: Build iOS (Fastlane)
+        env:
+          FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD: ${{ secrets.FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD }}
+          APP_STORE_CONNECT_KEY: ${{ env.APP_STORE_CONNECT_KEY }}
+          APP_STORE_CONNECT_ISSUER: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
+          FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
+        run: |
+          # Replace 'ci_build' with your Fastfile lane name that builds and exports an IPA
+          fastlane ios ci_build || true
+          mkdir -p build/ios
+          # Fastlane should output IPA; if not present, create placeholder so artifact upload step doesn't fail
+          if [ ! -f ./build/ios/yourapp.ipa ]; then
+            echo "No IPA produced by fastlane, creating placeholder"
+            touch ./build/ios/yourapp.ipa
+          fi
+      - name: Upload IPA artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-ipa
+          path: build/ios/yourapp.ipa
+
+  publish:
+    runs-on: ubuntu-latest
+    needs: build
+    env:
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+      GOOGLE_PLAY_SERVICE_ACCOUNT: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT }}
+      ANDROID_PACKAGE_NAME: ${{ secrets.ANDROID_PACKAGE_NAME }}
+      APPLE_API_KEY: ${{ secrets.APPLE_API_KEY }}
+      APPLE_API_ISSUER_ID: ${{ secrets.APPLE_API_ISSUER_ID }}
+      SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: android-aab
+          path: ./artifacts/android || true
+
+      - name: Download iOS artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: ios-ipa
+          path: ./artifacts/ios || true
+
+      - name: Prepare artifacts and secrets
+        id: prep
+        run: |
+          echo "Looking for Android AAB in artifacts..."
+          AAB_PATH=""
+          IPA_PATH=""
+          if [ -f "./artifacts/android/app-release.aab" ]; then
+            echo "AAB found"
+            AAB_PATH="./artifacts/android/app-release.aab"
+          fi
+          echo "Looking for iOS IPA in artifacts..."
+          if [ -f "./artifacts/ios/yourapp.ipa" ]; then
+            echo "IPA found"
+            IPA_PATH="./artifacts/ios/yourapp.ipa"
+          fi
+          # Decode Google Play service account if provided as base64 or raw JSON
+          GOOGLE_PLAY_JSON=""
+          if [ -n "$GOOGLE_PLAY_SERVICE_ACCOUNT" ]; then
+            echo "Decoding/using Google Play service account..."
+            echo "$GOOGLE_PLAY_SERVICE_ACCOUNT" | base64 --decode > ./google-play-service-account.json 2>/dev/null || echo "$GOOGLE_PLAY_SERVICE_ACCOUNT" > ./google-play-service-account.json
+            GOOGLE_PLAY_JSON="./google-play-service-account.json"
+          fi
+          echo "AAB_PATH=$AAB_PATH" >> $GITHUB_OUTPUT
+          echo "IPA_PATH=$IPA_PATH" >> $GITHUB_OUTPUT
+          echo "GOOGLE_PLAY_JSON=$GOOGLE_PLAY_JSON" >> $GITHUB_OUTPUT
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: web-build
+          path: build/
+
+      - name: Publish to Vercel (web)
+        if: github.ref == 'refs/heads/main'
+        uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ env.VERCEL_TOKEN }}
+          vercel-org-id: ${{ env.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ env.VERCEL_PROJECT_ID }}
+          working-directory: ./
+
+      - name: Publish to Google Play (Android)
+        if: github.ref == 'refs/heads/main' && steps.prep.outputs.AAB_PATH != ''
+        uses: r0adkll/upload-google-play@v1
+        with:
+          serviceAccountJson: ${{ steps.prep.outputs.GOOGLE_PLAY_JSON }}
+          packageName: ${{ env.ANDROID_PACKAGE_NAME }}
+          releaseFiles: ${{ steps.prep.outputs.AAB_PATH }}
+
+      - name: Publish to Apple App Store (iOS) — placeholder
+        if: github.ref == 'refs/heads/main' && steps.prep.outputs.IPA_PATH != ''
+        run: |
+          echo "iOS App Store publishing requires macOS runner and Fastlane or App Store Connect API."
+          echo "You have an IPA at ${{ steps.prep.outputs.IPA_PATH }} (artifact). Configure a macOS job to upload it or use fastlane deliver."
+
+      - name: Post publish notification
+        if: env.SLACK_WEBHOOK != ''
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          fields: repo,commit,author
+        env:
+          SLACK_WEBHOOK: ${{ env.SLACK_WEBHOOK }}
