@@ -37,14 +37,32 @@ jobs:
           prerelease: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Detect artifact to upload
+        id: detect_artifact
+        run: |
+          candidates=("build/frontend-prototype.html" "build/index.html" "build/build.zip" "dist/app.zip")
+          chosen=""
+          for c in "${candidates[@]}"; do
+            if [ -f "$c" ]; then
+              chosen="$c"
+              break
+            fi
+          done
+          if [ -z "$chosen" ]; then
+            echo "No artifact found among candidates: ${candidates[*]}"
+            echo "artifact_path=" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+          echo "Found artifact: $chosen"
+          echo "artifact_path=$chosen" >> $GITHUB_OUTPUT
       - name: Upload release asset (if present)
-        if: always()
+        if: steps.detect_artifact.outputs.artifact_path != ''
         uses: actions/upload-release-asset@v1
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: build/frontend-prototype.html
-          asset_name: frontend-prototype.html
-          asset_content_type: text/html
+          asset_path: ${{ steps.detect_artifact.outputs.artifact_path }}
+          asset_name: ${{ steps.detect_artifact.outputs.artifact_path }}
+          asset_content_type: application/octet-stream
       - name: Show release URL
         if: always()
         run: |
