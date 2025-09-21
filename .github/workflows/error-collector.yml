@@ -1,0 +1,74 @@
+name: Error Collector
+
+on:
+  workflow_run:
+    workflows: ["Release"]
+    types:
+      - completed
+
+jobs:
+  collect-failed-run:
+    if: ${{ github.event.workflow_run.conclusion == 'failure' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Prepare
+        run: |
+          echo "Run ID: ${{ github.event.workflow_run.id }}"
+          mkdir -p artifacts failed-run-logs
+
+      - name: Download workflow run logs (zip)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          RUN_ID=${{ github.event.workflow_run.id }}
+          OWNER=${{ github.repository_owner }}
+          REPO=${{ github.event.repository.name }}
+          echo "Downloading logs for run $RUN_ID"
+          curl -sL -H "Authorization: token $GITHUB_TOKEN" -o logs.zip "https://api.github.com/repos/$OWNER/$REPO/actions/runs/$RUN_ID/logs"
+          if [ -s logs.zip ]; then
+            unzip -q logs.zip -d failed-run-logs || true
+            echo "Unzipped logs into failed-run-logs/"
+          else
+            echo "No logs.zip downloaded or empty."
+          fi
+
+      - name: Create summarized report
+        run: |
+          # produce a short summary of the logs (first 500 lines across log files)
+          find failed-run-logs -type f -name '*.txt' -print0 | xargs -0 cat 2>/dev/null | sed -n '1,500p' > artifacts/summary.txt || true
+          echo "Generated summary (up to 500 lines):"
+          head -n 40 artifacts/summary.txt || true
+
+      - name: Upload logs as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: failed-workflow-logs-${{ github.event.workflow_run.id }}
+          path: failed-run-logs/
+
+      - name: Upload summary artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: failed-workflow-summary-${{ github.event.workflow_run.id }}
+          path: artifacts/summary.txt
+
+      - name: Open issue with summary
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const fs = require('fs')
+            const run = context.payload.workflow_run
+            let summary = 'No summary generated.'
+            try {
+              summary = fs.readFileSync('artifacts/summary.txt','utf8')
+            } catch (e) {
+              summary = 'Failed to read summary.txt: ' + e.message
+            }
+            const title = `Failure: ${run.name} (run #${run.id})`
+            const body = `A workflow run failed.\n\n- Workflow: ${run.name}\n- Run id: ${run.id}\n- Conclusion: ${run.conclusion}\n- Triggered by: ${run.event}\n\n----BEGIN SUMMARY----\n\n` + summary + `\n\n----END SUMMARY----`
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title,
+              body
+            })
