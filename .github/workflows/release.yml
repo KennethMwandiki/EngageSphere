@@ -40,6 +40,7 @@ jobs:
       - name: Detect artifact to upload
         id: detect_artifact
         run: |
+          set -e
           candidates=("build/frontend-prototype.html" "build/index.html" "build/build.zip" "dist/app.zip")
           chosen=""
           for c in "${candidates[@]}"; do
@@ -51,18 +52,31 @@ jobs:
           if [ -z "$chosen" ]; then
             echo "No artifact found among candidates: ${candidates[*]}"
             echo "artifact_path=" >> $GITHUB_OUTPUT
+            echo "artifact_name=" >> $GITHUB_OUTPUT
+            echo "artifact_content_type=" >> $GITHUB_OUTPUT
             exit 0
+          fi
+          # derive basename and content type
+          name=$(basename "$chosen")
+          ext="${name##*.}"
+          content_type="application/octet-stream"
+          if [ "$ext" = "html" ]; then
+            content_type="text/html"
+          elif [ "$ext" = "zip" ]; then
+            content_type="application/zip"
           fi
           echo "Found artifact: $chosen"
           echo "artifact_path=$chosen" >> $GITHUB_OUTPUT
+          echo "artifact_name=$name" >> $GITHUB_OUTPUT
+          echo "artifact_content_type=$content_type" >> $GITHUB_OUTPUT
       - name: Upload release asset (if present)
         if: steps.detect_artifact.outputs.artifact_path != ''
         uses: actions/upload-release-asset@v1
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ${{ steps.detect_artifact.outputs.artifact_path }}
-          asset_name: ${{ steps.detect_artifact.outputs.artifact_path }}
-          asset_content_type: application/octet-stream
+          asset_name: ${{ steps.detect_artifact.outputs.artifact_name }}
+          asset_content_type: ${{ steps.detect_artifact.outputs.artifact_content_type }}
       - name: Show release URL
         if: always()
         run: |
