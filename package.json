@@ -8,8 +8,8 @@
     "url": "https://github.com/KennethMwandiki/EngageSphere.git"
   },
   "scripts": {
-    "build:web": "echo \"Building web app...\" && mkdir -p build && cp -r frontend-prototype.html styles.css build/ || true",
-    "build": "node ./scripts/build-web.js",
+  "build:web": "echo \"Building web app...\" && mkdir -p dist && cp -r frontend-prototype.html styles.css dist/ || true",
+  "build": "node ./scripts/build-web.js",
     "build:android": "echo \"Android build placeholder. Run your native build here (e.g., Gradle)\" && exit 0",
     "build:ios": "echo \"iOS build placeholder. Requires macOS runner with Xcode\" && exit 0",
     "test": "echo \"No tests configured.\" && exit 0"

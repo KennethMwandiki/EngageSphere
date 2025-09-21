@@ -30,7 +30,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: my-artifact-${{ matrix.os }}
-          path: ./build
+          path: ./dist
 name: One-Click Publish
 
 on:
@@ -51,7 +51,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Build web
-        run: npm run build:web
+        run: npm run build
 
   android_build:
     runs-on: ubuntu-latest
@@ -129,17 +129,17 @@ jobs:
         run: |
           # Replace 'ci_build' with your Fastfile lane name that builds and exports an IPA
           fastlane ios ci_build || true
-          mkdir -p build/ios
+          mkdir -p dist/ios
           # Fastlane should output IPA; if not present, create placeholder so artifact upload step doesn't fail
-          if [ ! -f ./build/ios/yourapp.ipa ]; then
+          if [ ! -f ./dist/ios/yourapp.ipa ]; then
             echo "No IPA produced by fastlane, creating placeholder"
-            touch ./build/ios/yourapp.ipa
+            touch ./dist/ios/yourapp.ipa
           fi
       - name: Upload IPA artifact
         uses: actions/upload-artifact@v4
         with:
           name: ios-ipa
-          path: build/ios/yourapp.ipa
+          path: dist/ios/yourapp.ipa
 
   publish:
     runs-on: ubuntu-latest
@@ -199,7 +199,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: web-build
-          path: build/
+          path: dist/
 
       - name: Publish to Vercel (web)
         if: github.ref == 'refs/heads/main'

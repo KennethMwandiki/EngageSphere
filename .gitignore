@@ -21,7 +21,7 @@ package-lock.json
 Thumbs.db
 
 # Build
-build/
+dist/
 dist/
 
 # Logs

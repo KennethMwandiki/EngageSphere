@@ -6,7 +6,7 @@ const filesToCopy = [
   'styles.css'
 ];
 
-const outDir = path.join(__dirname, '..', 'build');
+const outDir = path.join(__dirname, '..', 'dist');
 if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
 
 filesToCopy.forEach((f) => {

@@ -5,6 +5,6 @@ set -euo pipefail
 echo "Preparing artifacts..."
 # placeholder: copy build artifacts to /artifacts
 mkdir -p artifacts
-cp -r build/* artifacts/ || true
+cp -r dist/* artifacts/ || true
 
 echo "Artifacts ready in ./artifacts"
