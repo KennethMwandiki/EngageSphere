@@ -19,3 +19,103 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+-------------------------------------------------------------------------------
+NOTICE — contributor and third-party components
+
+Contributions: By submitting a contribution to this repository (code, docs,
+or other content), you grant the repository owner and downstream users a
+perpetual, worldwide, non-exclusive, royalty-free license to use, modify,
+distribute, and sublicense the contributed material under the terms of the
+MIT License above. If you wish to contribute under a different license,
+please contact the repository owner before submitting your contribution.
+
+Third-party components: This project may include or depend on third-party
+libraries which are subject to their own licenses. Those licenses govern the
+use of those components. See the repository files (for example, `package.json`
+and any `LICENSE` files included in dependency folders) for details on those
+dependencies and their licenses.
+
+Permissions and rights
+
+The MIT License above grants broad rights to use, modify, and redistribute the
+Software. However, any additional or alternative permissions, exclusive
+licenses, or formal agreements that grant rights beyond those provided here
+may only be granted by the repository owner(s). In this repository the
+repository owner is the account listed on the project (currently
+"Kenneth Mwandiki"). Only repository owner(s) or other persons explicitly
+designated in writing by the repository owner(s) may:
+
+- Grant additional or exclusive licensing terms covering the repository or
+  parts of it;
+- Re-license the repository under an alternative license on behalf of the
+  project; or
+- Enter into separate agreements that confer rights to third parties beyond
+  the scope of the MIT License included here.
+
+Any such grant must be clearly documented and reference the repository and the
+files or components affected. Contributions from others do not, by themselves,
+convey the authority to make exclusive licensing decisions for the project.
+
+If you require a formal Contributor License Agreement (CLA) or have questions
+about permissions, please open an issue or contact the repository owner directly.
+MIT License
+
+Copyright (c) 2025 Kenneth Mwandiki
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+-------------------------------------------------------------------------------
+NOTICE — contributor and third-party components
+
+Contributions: By submitting a contribution to this repository (code, docs,
+or other content), you grant the repository owner and downstream users a
+perpetual, worldwide, non-exclusive, royalty-free license to use, modify,
+distribute, and sublicense the contributed material under the terms of the
+MIT License above. If you wish to contribute under a different license,
+please contact the repository owner before submitting your contribution.
+
+Third-party components: This project may include or depend on third-party
+libraries which are subject to their own licenses. Those licenses govern the
+use of those components. See the repository files (for example, `package.json`
+and any `LICENSE` files included in dependency folders) for details on those
+dependencies and their licenses.
+
+If a formal Contributor License Agreement (CLA) is required, the maintainers
+will provide one and document the process in CONTRIBUTING.md.MIT License
+
+Copyright (c) 2025 Kenneth Mwandiki
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
