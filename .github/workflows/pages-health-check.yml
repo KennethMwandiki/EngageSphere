@@ -1,0 +1,69 @@
+name: Pages health-check
+
+on:
+  workflow_dispatch: {}
+  schedule:
+    - cron: '0 6 * * *' # daily at 06:00 UTC
+  push:
+    branches:
+      - main
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout (shallow)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Query Pages API
+        id: pages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          api="https://api.github.com/repos/${{ github.repository }}/pages"
+          echo "Fetching $api"
+          status=$(curl -s -H "Authorization: Bearer $GITHUB_TOKEN" -H "Accept: application/vnd.github+json" "$api" | jq -r '.status')
+          echo "status=$status" >> $GITHUB_OUTPUT
+          curl -s -H "Authorization: Bearer $GITHUB_TOKEN" -H "Accept: application/vnd.github+json" "$api" > pages.json
+
+      - name: Save pages.json
+        uses: actions/upload-artifact@v4
+        with:
+          name: pages-json
+          path: pages.json
+
+      - name: Fetch HTML snapshot (if built)
+        if: steps.pages.outputs.status == 'built'
+        run: |
+          set -euo pipefail
+          api="https://api.github.com/repos/${{ github.repository }}/pages"
+          page_url=$(curl -s -H "Authorization: Bearer $GITHUB_TOKEN" -H "Accept: application/vnd.github+json" "$api" | jq -r '.html_url')
+          echo "page_url=$page_url"
+          # create snapshots dir for artifact
+          mkdir -p snapshots
+          # save timestamped snapshot
+          ts=$(date -u +"%Y%m%dT%H%M%SZ")
+          curl -fsSL "$page_url" -o snapshots/site-snapshot-${ts}.html
+          # also save latest snapshot
+          curl -fsSL "$page_url" -o snapshots/site-snapshot-latest.html
+
+      - name: Upload snapshot artifact
+        if: steps.pages.outputs.status == 'built'
+        uses: actions/upload-artifact@v4
+        with:
+          name: pages-snapshots
+          path: snapshots
+
+      - name: Log summary
+        run: |
+          echo "Pages status: ${{ steps.pages.outputs.status }}"
+          if [ "${{ steps.pages.outputs.status }}" = "built" ]; then
+            echo "Snapshot artifact uploaded (pages-snapshots)"
+          else
+            echo "No snapshot was taken because Pages is not built."
+          fi

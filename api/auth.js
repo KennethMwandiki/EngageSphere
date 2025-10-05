@@ -3,11 +3,16 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const router = express.Router();
 
-const JWT_SECRET = process.env.JWT_SECRET || 'supersecretkey';
+const JWT_SECRET = process.env.JWT_SECRET;
+
+// Development-only users (do not use in production). Remove before publishing production systems.
 const USERS = [
-  { username: 'admin', password: 'adminpass', role: 'admin' },
-  { username: 'user', password: 'userpass', role: 'user' }
+  // To run locally, set JWT_SECRET in your environment and use secure passwords.
 ];
+
+if (!JWT_SECRET) {
+  console.warn('WARNING: JWT_SECRET is not set. For local development, set JWT_SECRET in your environment. Do NOT use default secrets in production.');
+}
 
 // POST /api/auth/login
 router.post('/auth/login', (req, res) => {
