@@ -14,11 +14,20 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Run gitleaks
-        id: gitleaks
-        uses: zricethezav/gitleaks-action@v2
-        with:
-          args: detect --source . --report-format json --report-path gitleaks-report.json || true
+      - name: Install gitleaks
+        run: |
+          set -e
+          echo "Downloading gitleaks"
+          curl -sSL -o gitleaks https://github.com/zricethezav/gitleaks/releases/latest/download/gitleaks-linux-amd64
+          chmod +x gitleaks
+          sudo mv gitleaks /usr/local/bin/gitleaks
+
+      - name: Run gitleaks (write json)
+        id: run_gitleaks
+        run: |
+          set -e
+          echo "Running gitleaks detect..."
+          /usr/local/bin/gitleaks detect --source . --report-format json --report-path gitleaks-report.json || true
 
       - name: Upload gitleaks report
         uses: actions/upload-artifact@v4
@@ -27,7 +36,7 @@ jobs:
           path: gitleaks-report.json
 
       - name: Fail on findings (optional)
-        if: steps.gitleaks.outputs.exitcode != '0'
+        if: steps.run_gitleaks.outcome == 'failure' || steps.run_gitleaks.conclusion == 'failure'
         run: |
-          echo "Gitleaks reported potential secrets. See gitleaks-report artifact.";
+          echo "Gitleaks run finished; check artifact gitleaks-report for findings.";
           exit 1
