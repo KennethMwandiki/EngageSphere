@@ -14,20 +14,22 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install gitleaks
+      - name: Install gitleaks via go
         run: |
           set -e
-          echo "Downloading gitleaks"
-          curl -sSL -o gitleaks https://github.com/zricethezav/gitleaks/releases/latest/download/gitleaks-linux-amd64
-          chmod +x gitleaks
-          sudo mv gitleaks /usr/local/bin/gitleaks
+          echo "Installing gitleaks via go"
+          go install github.com/zricethezav/gitleaks/v8@latest
+          export PATH="$PATH:$(go env GOPATH)/bin:$HOME/go/bin"
+          echo "gitleaks version: $(gitleaks version || true)"
 
       - name: Run gitleaks (write json)
         id: run_gitleaks
         run: |
           set -e
           echo "Running gitleaks detect..."
-          /usr/local/bin/gitleaks detect --source . --report-format json --report-path gitleaks-report.json || true
+          # ensure go bin is on PATH
+          export PATH="$PATH:$(go env GOPATH)/bin:$HOME/go/bin"
+          gitleaks detect --source . --report-format json --report-path gitleaks-report.json || true
 
       - name: Upload gitleaks report
         uses: actions/upload-artifact@v4
