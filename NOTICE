@@ -1,0 +1,21 @@
+# NOTICE
+
+This product includes software developed as part of the **EngageSphere Project**.
+
+## License
+This project is licensed under the **MIT License**.  
+See the [LICENSE](./LICENSE) file for details.
+
+## Attribution
+- Portions of this software may include third-party libraries.  
+  Each library is licensed under its own terms, which are documented in the [licenses/](./licenses) directory.
+- Contributors retain copyright to their contributions, 
+  but agree to license them under the MIT License.
+
+## Trademarks
+- “EngageSphere” is a project name and should not be used for endorsement without written permission.
+- Third-party names, logos, and brands are property of their respective owners.
+
+## Disclaimer
+This software is provided “as is,” without warranty of any kind, express or implied.  
+See the MIT License for details.
