@@ -1,0 +1,44 @@
+# Default fallback: repo admins
+*    @KennethMwandiki
+
+# Backend and API
+/api/                 @KennethMwandiki @engagesphere-backend
+/backend/             @KennethMwandiki @engagesphere-backend
+server/**             @KennethMwandiki @engagesphere-backend
+*.go                  @engagesphere-backend
+*.py                  @engagesphere-backend
+
+# Frontend
+/frontend/            @KennethMwandiki @engagesphere-frontend
+web/**                @KennethMwandiki @engagesphere-frontend
+*.html                @engagesphere-frontend
+*.css                 @engagesphere-frontend
+*.js                  @engagesphere-frontend
+*.ts                  @engagesphere-frontend
+
+# Mobile (if present)
+/mobile/              @KennethMwandiki @engagesphere-mobile
+ios/**                @engagesphere-mobile
+android/**            @engagesphere-mobile
+
+# Infrastructure, CI and deploy
+.github/workflows/    @engagesphere-devops
+.github/workflows/**  @engagesphere-devops
+infra/**              @engagesphere-devops
+deploy/**             @engagesphere-devops
+Dockerfile            @engagesphere-devops
+docker/**             @engagesphere-devops
+
+# Security, compliance, and legal docs
+SECURITY_AND_COMPLIANCE.md  @engagesphere-security
+SECURITY.md                 @engagesphere-security
+CONTRIBUTING.md             @engagesphere-legal
+LICENSE                     @engagesphere-legal
+
+# Documentation and architecture
+docs/**               @engagesphere-architecture
+README.md             @engagesphere-architecture
+
+# Release assets and changelog
+RELEASES/**           @engagesphere-release
+CHANGELOG.md          @engagesphere-release
