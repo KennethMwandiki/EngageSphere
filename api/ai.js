@@ -12,15 +12,24 @@ const AZURE_OPENAI_KEY = process.env.AZURE_OPENAI_KEY;
 const VERTEX_AI_URL = 'https://us-central1-aiplatform.googleapis.com/v1/projects/vertex-ai-ml-demo/locations/us-central1/publishers/google/models/text-bison:predict';
 const VERTEX_AI_KEY = process.env.VERTEX_AI_KEY;
 
-// GPT-5 mini endpoint and key (example, replace with real values)
+// GPT-5 mini (preview) endpoint and key
 const GPT5_MINI_URL = process.env.GPT5_MINI_URL || 'https://api.gpt5mini.com/v1/chat/completions';
-const GPT5_MINI_KEY = process.env.GPT5_MINI_KEY || 'demo-gpt5mini-key';
+const GPT5_MINI_KEY = process.env.GPT5_MINI_KEY;
+
+// Default provider can be overridden per-request via `provider` in the body
+// or globally via the `DEFAULT_AI_PROVIDER` environment variable.
+const DEFAULT_AI_PROVIDER = (process.env.DEFAULT_AI_PROVIDER || 'gpt5mini').toLowerCase();
 
 // Helper: choose provider ("azure", "vertex", "gpt5mini")
 function getProvider(req) {
-  if (req.body.provider === 'vertex') return 'vertex';
-  if (req.body.provider === 'gpt5mini' || req.body.provider === 'gpt-5-mini' || req.body.provider === 'gpt5') return 'gpt5mini';
-  return 'azure';
+  // If request specifically asks for a provider, respect it (with a few aliases)
+  const p = (req.body && req.body.provider) ? String(req.body.provider).toLowerCase() : null;
+  if (p === 'vertex') return 'vertex';
+  if (p === 'gpt5mini' || p === 'gpt-5-mini' || p === 'gpt5' || p === 'raptor' || p === 'raptor-mini') return 'gpt5mini';
+  if (p === 'azure' || p === 'openai' || p === 'azureopenai') return 'azure';
+
+  // Otherwise fall back to the configured default provider (env-controlled)
+  return DEFAULT_AI_PROVIDER;
 }
 
 // POST /api/ai/personalize
