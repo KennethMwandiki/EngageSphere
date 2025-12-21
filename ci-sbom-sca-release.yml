@@ -60,7 +60,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: test-reports
-          path: ./test-results || ./reports || .
+          path: test-results/
 
   sbom-sca:
     name: SBOM and SCA
@@ -98,13 +98,13 @@ jobs:
       - name: Run SAST placeholder
         run: |
           # Replace the following with your SAST tool invocation (e.g., semgrep)
-          if command -v semgrep &gt;/dev/null 2&gt;&1; then semgrep --config auto --json --output semgrep-results.json || true; fi
+          if command -v semgrep &gt;/dev/null 2&gt;&1; then semgrep --config auto --json --output semgrep-results.json; fi
       - name: Upload SAST results
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: sast-results
-          path: semgrep-results.json || .
+          path: semgrep-results.json
 
   build-and-package:
     name: Build and package artifacts
@@ -158,14 +158,21 @@ jobs:
       - name: Create GitHub Release (draft)
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: v${{ github.run_number }}-${{ github.sha }}
-          name: Release v${{ github.run_number }}-${{ github.sha }}
+          tag_name: v${{ github.run_number }}-${{ substring(github.sha, 0, 7) }}
+          name: Release v${{ github.run_number }}-${{ substring(github.sha, 0, 7) }}
           body: |
-            Automated release produced by CI.
-            Artifacts: build artifacts, SBOM, SCA, SAST reports.
-      - name: Upload signed assets to release
-        uses: softprops/action-gh-release@v1
-        with:
-          files: '*.tgz,*.tar.gz,*.asc,*.sha256,*.json'
+            Automated release produced by CI for commit ${{ github.sha }}.
+            See commit details: https://github.com/${{ github.repository }}/commit/${{ github.sha }}
+
+            **Artifacts:**
+            - Build artifacts
+            - SBOM, SCA, and SAST reports
+          files: |
+            *.tgz
+            *.tar.gz
+            *.asc
+            *.sha256
+            *.json
+          draft: true
       - name: Notify security owners
         run: echo "Release draft created; require manual approval in environment before publishing"
