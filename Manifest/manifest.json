@@ -1,26 +1,20 @@
 {
 "name": "EngageSphere",
-"short_name": "This name will show in your Windows taskbar, in the start menu, and Android homescreen",
-"start_url": "The URL that should be loaded when your application is opened",
+"short_name": "EngageSphere",
+"start_url": "/",
 "display": "standalone",
-"description": "A description for your application",
-"lang": " The default language of your application",
+"description": "A comprehensive engagement platform with live Q&A, real-time reactions, and interactive features.",
+"lang": "en-US",
 "dir": "auto",
-"theme_color": "#000000",
-"background_color": "#000000",
-"orientation": "any",
+"theme_color": "#0052CC",
+"background_color": "#FFFFFF",
+"orientation": "portrait-primary",
 "icons": [
     {
-        "src": "https://www.pwabuilder.com/assets/icons/icon_512.png",
-        "sizes": "512x512",
-        "type": "image/png",
-        "purpose": "maskable"
-    },
-    {
-        "src": "https://www.pwabuilder.com/assets/icons/icon_192.png",
-        "sizes": "192x192",
-        "type": "image/png",
-        "purpose": "any"
+        "src": "/logo.svg",
+        "sizes": "256x256",
+        "type": "image/svg+xml",
+        "purpose": "maskable any"
     }
 ],
 "screenshots": [

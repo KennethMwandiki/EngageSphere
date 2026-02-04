@@ -4,9 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>EngageSphere Platform</title>
+    <link rel="icon" href="logo.svg" type="image/svg+xml" />
         <link rel="stylesheet" href="styles.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>navigator.serviceWorker.register("Manifest/service-worker.js")</script> 
+    <link rel="manifest" href="Manifest/manifest.json" />
 </head>
 <body>
         <header style="background:#0052CC; color:#fff; padding:1.5em 1em; display:flex; align-items:center; justify-content:space-between;">
@@ -181,6 +184,48 @@
             <div id="externalLiveResult" class="ai-result"></div>
             <div id="captionsContainer" class="admin-result" aria-live="polite" style="display:none;margin-top:0.5em; background:#111;color:#fff;padding:8px;border-radius:6px;">Captions will appear here when enabled.</div>
         </section>
+        <!-- Live enhancements: Q&A, Reactions, Tutorial -->
+    <section id="liveEnhancements" class="section">
+        <h3>Live Q&amp;A & Reactions</h3>
+        <div id="qaContainer" style="display:flex;gap:1em;align-items:flex-start;">
+            <div style="flex:1;">
+                <div id="questionFormArea">
+                    <form id="questionForm">
+                        <input id="questionInput" type="text" placeholder="Ask a question to the host..." required style="width:70%" />
+                        <button type="submit">Submit Question</button>
+                        <button type="button" id="raiseHandBtn">Raise Hand ✋</button>
+                    </form>
+                    <div id="questionStatus" class="muted"></div>
+                </div>
+                <div style="margin-top:12px;">
+                    <h4>Audience Reactions</h4>
+                    <div id="reactionBar" style="display:flex;gap:8px;align-items:center;">
+                        <button class="reactionBtn" data-emoji="👍">👍 <span class="count">0</span></button>
+                        <button class="reactionBtn" data-emoji="❤️">❤️ <span class="count">0</span></button>
+                        <button class="reactionBtn" data-emoji="😂">😂 <span class="count">0</span></button>
+                        <button class="reactionBtn" data-emoji="🎉">🎉 <span class="count">0</span></button>
+                        <button class="reactionBtn" data-emoji="🔥">🔥 <span class="count">0</span></button>
+                    </div>
+                </div>
+            </div>
+            <div style="width:360px;">
+                <h4>Moderator Queue</h4>
+                <div id="moderatorPanel" style="background:#f7f9fc;padding:8px;border-radius:6px;min-height:120px;">
+                    <div id="questionQueue">No questions yet.</div>
+                </div>
+                <div style="margin-top:8px;font-size:12px;color:#666">Moderators can approve/dismiss questions. Set `userRole=moderator` in localStorage for demo.</div>
+            </div>
+        </div>
+        <!-- Tutorial overlay (adaptive) -->
+        <div id="tutorialOverlay" style="position:fixed;right:20px;bottom:20px;background:#fff;border:1px solid #ddd;padding:12px;border-radius:8px;box-shadow:0 6px 18px rgba(0,0,0,0.08);max-width:320px;display:none;z-index:9999;">
+            <div id="tutorialContent"></div>
+            <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:8px;">
+                <button id="tutorialPrevBtn">Back</button>
+                <button id="tutorialNextBtn">Next</button>
+                <button id="tutorialCloseBtn">Close</button>
+            </div>
+        </div>
+    </section>
         <!-- Login Form (replaces old login section) -->
     <section id="login" class="section">
             <h2>Login</h2>
@@ -732,6 +777,189 @@
         }
         </script>
         <script src="script.js"></script>
+        <script>
+        (function(){
+            // Live enhancements script: WS connection, reactions, Q&A, moderator, tutorial
+            const wsUrl = (location.protocol === 'https:' ? 'wss:' : 'ws:') + '//' + location.host + '/live-socket';
+            let ws = null, wsOpen = false;
+            try {
+                ws = new WebSocket(wsUrl);
+                ws.addEventListener('open', () => { wsOpen = true; console.info('Live socket open'); });
+                ws.addEventListener('message', e => {
+                    try {
+                        const msg = JSON.parse(e.data);
+                        handleRemoteEvent(msg.type, msg.payload);
+                    } catch (err) { console.warn('Invalid live message', err); }
+                });
+                ws.addEventListener('close', () => { wsOpen = false; console.info('Live socket closed'); });
+            } catch (err) { console.info('WebSocket not available', err); }
+
+            function emit(type, payload) {
+                const msg = { type, payload };
+                if (wsOpen) {
+                    ws.send(JSON.stringify(msg));
+                } else {
+                    // Fallback to REST
+                    fetch('/api/live/event', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(msg)}).catch(()=>{});
+                }
+            }
+
+            // --- Reactions ---
+            function updateReactionCount(el, delta) {
+                const span = el.querySelector('.count');
+                const v = parseInt(span.innerText || '0', 10) + delta;
+                span.innerText = String(Math.max(0, v));
+            }
+            document.querySelectorAll('.reactionBtn').forEach(btn => {
+                btn.addEventListener('click', e => {
+                    const emoji = btn.dataset.emoji;
+                    updateReactionCount(btn, 1);
+                    emit('reaction', { emoji });
+                    // Adapt tutorial: mark reacted
+                    if (localStorage.getItem('tutorialStep') === '0') advanceTutorial();
+                });
+            });
+
+            // --- Q&A ---
+            const qForm = document.getElementById('questionForm');
+            const qInput = document.getElementById('questionInput');
+            const qStatus = document.getElementById('questionStatus');
+            const queueDiv = document.getElementById('questionQueue');
+
+            qForm.addEventListener('submit', async function(e){
+                e.preventDefault();
+                const text = qInput.value.trim();
+                if (!text) return;
+                const payload = { text, user: localStorage.getItem('userName') || 'guest', ts: Date.now() };
+                qStatus.innerText = 'Submitting…';
+                if (wsOpen) {
+                    emit('question', payload);
+                    qStatus.innerText = 'Sent — pending moderation';
+                } else {
+                    try {
+                        const res = await fetch('/api/live/question', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload) });
+                        const data = await res.json();
+                        if (!res.ok) throw new Error(data.error||'Failed');
+                        qStatus.innerText = 'Submitted';
+                    } catch (err) {
+                        qStatus.innerText = 'Submission failed: '+err.message;
+                    }
+                }
+                qInput.value = '';
+                if (localStorage.getItem('tutorialStep') === '0') advanceTutorial();
+            });
+
+            // Moderator actions
+            function renderQueue(items) {
+                if (!items || items.length === 0) { queueDiv.innerHTML = 'No questions yet.'; return; }
+                queueDiv.innerHTML = items.map(q=>{
+                    const safeText = (q.text||'').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+                    const id = q.id || q.ts || Math.random().toString(36).slice(2,9);
+                    return `<div data-qid="${id}" style="padding:6px;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center;">
+                                <div style="flex:1;margin-right:8px;"><b>${q.user||'guest'}</b>: ${safeText}</div>
+                                <div style="display:flex;gap:6px;">
+                                    <button class="approveBtn" data-qid="${id}">Approve</button>
+                                    <button class="dismissBtn" data-qid="${id}">Dismiss</button>
+                                </div>
+                            </div>`;
+                }).join('');
+                // Bind moderator buttons
+                queueDiv.querySelectorAll('.approveBtn').forEach(b=>b.addEventListener('click', e=>moderatorAction('approve', b.dataset.qid)));
+                queueDiv.querySelectorAll('.dismissBtn').forEach(b=>b.addEventListener('click', e=>moderatorAction('dismiss', b.dataset.qid)));
+            }
+
+            async function moderatorAction(action, qid) {
+                const role = localStorage.getItem('userRole');
+                if (role !== 'moderator' && role !== 'admin') { alert('Moderator only action'); return; }
+                emit('moderation', { action, qid });
+                // optimistic UI change
+                const item = queueDiv.querySelector(`[data-qid="${qid}"]`);
+                if (item) item.style.opacity = '0.4';
+            }
+
+            // Handle remote events from WS or server
+            function handleRemoteEvent(type, payload) {
+                if (type === 'reaction') {
+                    // find button by emoji
+                    const btn = Array.from(document.querySelectorAll('.reactionBtn')).find(b => b.dataset.emoji === payload.emoji);
+                    if (btn) updateReactionCount(btn, 1);
+                } else if (type === 'question') {
+                    // append to queue
+                    const cur = (window._qaQueue || []).concat([payload]);
+                    window._qaQueue = cur;
+                    renderQueue(cur);
+                } else if (type === 'moderation') {
+                    // payload: {action, qid}
+                    if (payload.action === 'approve') {
+                        const el = queueDiv.querySelector(`[data-qid="${payload.qid}"]`);
+                        if (el) el.remove();
+                        // Optionally show it in approved area (simple toast)
+                        showTemporaryMessage('Question approved: ' + (payload.text||payload.qid));
+                    } else if (payload.action === 'dismiss') {
+                        const el = queueDiv.querySelector(`[data-qid="${payload.qid}"]`);
+                        if (el) el.remove();
+                    }
+                }
+            }
+
+            function showTemporaryMessage(msg) {
+                const el = document.createElement('div');
+                el.innerText = msg; el.style.position='fixed'; el.style.left='20px'; el.style.bottom='20px'; el.style.background='#222'; el.style.color='#fff'; el.style.padding='8px 12px'; el.style.borderRadius='6px'; el.style.zIndex='9999';
+                document.body.appendChild(el);
+                setTimeout(()=>el.remove(), 3500);
+            }
+
+            // Poll initial queue if WS unavailable
+            if (!wsOpen) {
+                fetch('/api/live/queue').then(r=>r.json()).then(data=>{ window._qaQueue = data || []; renderQueue(window._qaQueue); }).catch(()=>{});
+            }
+
+            // --- Tutorial (adaptive) ---
+            const tutorialOverlay = document.getElementById('tutorialOverlay');
+            const tutorialContent = document.getElementById('tutorialContent');
+            const prevBtn = document.getElementById('tutorialPrevBtn');
+            const nextBtn = document.getElementById('tutorialNextBtn');
+            const closeBtn = document.getElementById('tutorialCloseBtn');
+
+            const steps = [
+                { title: 'Welcome to Live', body: 'Try submitting a question using the field. It will go to moderators for approval.' },
+                { title: 'React in Real-Time', body: 'Use the reaction buttons to send emojis that sync across participants.' },
+                { title: 'Moderator Controls', body: 'Moderators can approve or dismiss questions from the queue.' }
+            ];
+
+            function showTutorial() {
+                const s = parseInt(localStorage.getItem('tutorialStep') || '0',10);
+                const step = steps[s] || steps[steps.length-1];
+                tutorialContent.innerHTML = `<b>${step.title}</b><div style="margin-top:6px">${step.body}</div>`;
+                tutorialOverlay.style.display = 'block';
+            }
+            function hideTutorial() { tutorialOverlay.style.display = 'none'; }
+            function advanceTutorial() {
+                let s = parseInt(localStorage.getItem('tutorialStep') || '0',10);
+                s = Math.min(steps.length-1, s+1);
+                localStorage.setItem('tutorialStep', String(s));
+                if (s >= steps.length-1) hideTutorial(); else showTutorial();
+            }
+            function retreatTutorial() {
+                let s = Math.max(0, parseInt(localStorage.getItem('tutorialStep') || '0',10)-1);
+                localStorage.setItem('tutorialStep', String(s)); showTutorial();
+            }
+
+            prevBtn.addEventListener('click', retreatTutorial);
+            nextBtn.addEventListener('click', advanceTutorial);
+            closeBtn.addEventListener('click', ()=>{ localStorage.setItem('tutorialStep','99'); hideTutorial(); });
+
+            // Show tutorial if never completed
+            if (!localStorage.getItem('tutorialStep')) {
+                localStorage.setItem('tutorialStep','0');
+                setTimeout(showTutorial, 800);
+            }
+
+            // Auto-advance tutorial on user actions
+            document.getElementById('raiseHandBtn').addEventListener('click', ()=>{ emit('raiseHand', { user: localStorage.getItem('userName')||'guest' }); showTemporaryMessage('Hand raised'); if (localStorage.getItem('tutorialStep')==='0') advanceTutorial(); });
+
+        })();
+        </script>
         <!-- Styles moved to styles.css for deployment best practices -->
 </body>
 </html>
