@@ -1,0 +1,27 @@
+<step title="Incoming Request" date="2026-01-25T21:27:02.527" instance="22a7da" url="/api/zipdeploy?isAsync=true" method="POST" type="request" pid="9356,2,10" Content-Length="112704840" Content-Type="application/octet-stream" Accept="application/json" Accept-Encoding="gzip" Authorization="Bea..." Host="app-engagesphere.scm.azurewebsites.net" User-Agent="azsdk-go-zip-deploy/1.0.0 (go1.23.0 X:loopvar; Windows_NT),azdev/1.11.0 (Go go1.23.0 X:loopvar; windows/amd64)" X-Ms-Correlation-Request-Id="14f586481053ba212698297467c363ed" X-ARR-LOG-ID="14f58648-1053-ba21-2698-297467c363ed" CLIENT-IP="154.159.252.162:4023" X-SITE-DEPLOYMENT-ID="app-engagesphere" WAS-DEFAULT-HOSTNAME="app-engagesphere.scm.azurewebsites.net" X-Forwarded-Proto="https" X-AppService-Proto="https" X-Forwarded-TlsVersion="1.3" X-WAWS-Unencoded-URL="/api/zipdeploy?isAsync=true" >
+  <step title="Cleanup Xml Logs" date="2026-01-25T21:27:02.527" /><!-- duration: 0ms -->
+  <step title="ZipPushDeploy" date="2026-01-25T21:27:02.543" >
+    <step title="ZipDeploy. Extract zip. " date="2026-01-25T21:27:02.543" /><!-- duration: 0ms -->
+    <step title="Starting PushDeployAsync" date="2026-01-25T21:27:02.543" /><!-- duration: 0ms -->
+    <step title="Updating shutdown sentinel last write time" date="2026-01-25T21:27:02.543" SemaphoreCount="7" /><!-- duration: 16ms -->
+    <step title="LockFile &apos;C:\home\site\locks\deployments.lock&apos; acquired" date="2026-01-25T21:27:02.558" /><!-- duration: 0ms -->
+    <step title="Saving request content to C:\local\Temp\zipdeploy\t1wfw1rm.zip" date="2026-01-25T21:27:02.558" >
+      <step title="Writing 17,821,696 bytes to C:\local\Temp\zipdeploy\t1wfw1rm.zip" date="2026-01-25T21:27:32.964" /><!-- duration: 0ms -->
+      <step title="Writing 29,028,352 bytes to C:\local\Temp\zipdeploy\t1wfw1rm.zip" date="2026-01-25T21:28:02.983" /><!-- duration: 0ms -->
+      <step title="Writing 39,923,712 bytes to C:\local\Temp\zipdeploy\t1wfw1rm.zip" date="2026-01-25T21:28:32.984" /><!-- duration: 0ms -->
+      <step title="Writing 46,772,224 bytes to C:\local\Temp\zipdeploy\t1wfw1rm.zip" date="2026-01-25T21:29:03.000" /><!-- duration: 0ms -->
+      <step title="Writing 52,719,616 bytes to C:\local\Temp\zipdeploy\t1wfw1rm.zip" date="2026-01-25T21:29:33.109" /><!-- duration: 16ms -->
+      <step title="Writing 60,633,088 bytes to C:\local\Temp\zipdeploy\t1wfw1rm.zip" date="2026-01-25T21:30:03.153" /><!-- duration: 0ms -->
+      <step title="Writing 66,187,264 bytes to C:\local\Temp\zipdeploy\t1wfw1rm.zip" date="2026-01-25T21:30:33.708" /><!-- duration: 0ms -->
+      <step title="Writing 80,048,128 bytes to C:\local\Temp\zipdeploy\t1wfw1rm.zip" date="2026-01-25T21:31:03.755" /><!-- duration: 0ms -->
+      <step title="Writing 90,730,496 bytes to C:\local\Temp\zipdeploy\t1wfw1rm.zip" date="2026-01-25T21:31:33.788" /><!-- duration: 16ms -->
+      <step title="Writing 102,739,968 bytes to C:\local\Temp\zipdeploy\t1wfw1rm.zip" date="2026-01-25T21:32:03.913" /><!-- duration: 0ms -->
+      <step title="Total 112,704,840 bytes written to C:\local\Temp\zipdeploy\t1wfw1rm.zip" date="2026-01-25T21:32:24.609" /><!-- duration: 16ms -->
+    </step><!-- duration: 322066ms -->
+    <step title="LockFile &apos;C:\home\site\locks\deployments.lock&apos; released" date="2026-01-25T21:32:24.624" /><!-- duration: 0ms -->
+    <step title="Deleting shutdown sentinel file" date="2026-01-25T21:32:24.624" SemaphoreCount="8" /><!-- duration: 0ms -->
+    <step title="Starting FetchDeploy" date="2026-01-25T21:32:24.624" /><!-- duration: 16ms -->
+    <step title="Start deployment in the background" date="2026-01-25T21:32:24.640" /><!-- duration: 31ms -->
+  </step><!-- duration: 322128ms -->
+  <step title="Outgoing response" date="2026-01-25T21:32:24.687" type="response" statusCode="202" statusText="Accepted" Server="Microsoft-IIS/10.0" x-ms-request-id="14f58648-1053-ba21-2698-297467c363ed" Retry-After="30" Cache-Control="private" X-AspNet-Version="4.0.30319" Location="https://app-engagesphere.scm.azurewebsites.net/api/deployments/latest?deployer=ZipDeploy&amp;time=2026-01-25_21-32-24Z" /><!-- duration: 0ms -->
+</step><!-- duration: 322160ms -->

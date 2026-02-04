@@ -1,0 +1,16 @@
+<step title="Incoming Request" date="2026-01-25T21:08:13.257" instance="22a7da" url="/api/zipdeploy?isAsync=true" method="POST" type="request" pid="9356,2,7" Connection="Keep-Alive" Content-Length="10112" Content-Type="application/octet-stream" Accept="application/json" Accept-Encoding="gzip" Authorization="Bea..." Host="app-engagesphere.scm.azurewebsites.net" User-Agent="azsdk-go-zip-deploy/1.0.0 (go1.23.0 X:loopvar; Windows_NT),azdev/1.11.0 (Go go1.23.0 X:loopvar; windows/amd64)" X-Ms-Correlation-Request-Id="78e9ca4d55f8acc5dbb67f9e395c6ca0" X-ARR-LOG-ID="78e9ca4d-55f8-acc5-dbb6-7f9e395c6ca0" CLIENT-IP="154.159.252.162:31638" X-SITE-DEPLOYMENT-ID="app-engagesphere" WAS-DEFAULT-HOSTNAME="app-engagesphere.scm.azurewebsites.net" X-Forwarded-Proto="https" X-AppService-Proto="https" X-Forwarded-TlsVersion="1.3" X-WAWS-Unencoded-URL="/api/zipdeploy?isAsync=true" X-MS-COLDSTART="1" >
+  <step title="ZipPushDeploy" date="2026-01-25T21:08:13.773" >
+    <step title="ZipDeploy. Extract zip. " date="2026-01-25T21:08:13.788" /><!-- duration: 0ms -->
+    <step title="Starting PushDeployAsync" date="2026-01-25T21:08:13.804" /><!-- duration: 0ms -->
+    <step title="Updating shutdown sentinel last write time" date="2026-01-25T21:08:13.835" SemaphoreCount="7" /><!-- duration: 16ms -->
+    <step title="LockFile &apos;C:\home\site\locks\deployments.lock&apos; acquired" date="2026-01-25T21:08:13.851" /><!-- duration: 0ms -->
+    <step title="Saving request content to C:\local\Temp\zipdeploy\0wxmu4zq.zip" date="2026-01-25T21:08:13.851" >
+      <step title="Total 10,112 bytes written to C:\local\Temp\zipdeploy\0wxmu4zq.zip" date="2026-01-25T21:08:13.882" /><!-- duration: 0ms -->
+    </step><!-- duration: 31ms -->
+    <step title="LockFile &apos;C:\home\site\locks\deployments.lock&apos; released" date="2026-01-25T21:08:13.882" /><!-- duration: 16ms -->
+    <step title="Deleting shutdown sentinel file" date="2026-01-25T21:08:13.897" SemaphoreCount="8" /><!-- duration: 0ms -->
+    <step title="Starting FetchDeploy" date="2026-01-25T21:08:13.897" /><!-- duration: 0ms -->
+    <step title="Start deployment in the background" date="2026-01-25T21:08:13.913" /><!-- duration: 63ms -->
+  </step><!-- duration: 203ms -->
+  <step title="Outgoing response" date="2026-01-25T21:08:14.007" type="response" statusCode="202" statusText="Accepted" Server="Microsoft-IIS/10.0" x-ms-request-id="78e9ca4d-55f8-acc5-dbb6-7f9e395c6ca0" Retry-After="30" Cache-Control="private" X-AspNet-Version="4.0.30319" Location="https://app-engagesphere.scm.azurewebsites.net/api/deployments/latest?deployer=ZipDeploy&amp;time=2026-01-25_21-08-13Z" /><!-- duration: 0ms -->
+</step><!-- duration: 750ms -->

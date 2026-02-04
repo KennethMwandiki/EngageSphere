@@ -1,0 +1,232 @@
+Thu Jan 29 2026 18:08:42 GMT+0000 (Coordinated Universal Time): Application has thrown an uncaught exception and is terminated:
+C:\home\site\wwwroot\node_modules\axios\dist\node\axios.cjs:1404
+  ...utils,
+  ^^^
+
+SyntaxError: Unexpected token ...
+    at createScript (vm.js:56:10)
+    at Object.runInThisContext (vm.js:97:10)
+    at Module._compile (module.js:549:28)
+    at Object.Module._extensions..js (module.js:586:10)
+    at Module.load (module.js:494:32)
+    at tryModuleLoad (module.js:453:12)
+    at Function.Module._load (module.js:445:3)
+    at Module.require (module.js:504:17)
+    at require (internal/module.js:20:19)
+    at Object.<anonymous> (C:\home\site\wwwroot\server.js:2:15)
+Thu Jan 29 2026 18:08:46 GMT+0000 (Coordinated Universal Time): Application has thrown an uncaught exception and is terminated:
+C:\home\site\wwwroot\node_modules\axios\dist\node\axios.cjs:1404
+  ...utils,
+  ^^^
+
+SyntaxError: Unexpected token ...
+    at createScript (vm.js:56:10)
+    at Object.runInThisContext (vm.js:97:10)
+    at Module._compile (module.js:549:28)
+    at Object.Module._extensions..js (module.js:586:10)
+    at Module.load (module.js:494:32)
+    at tryModuleLoad (module.js:453:12)
+    at Function.Module._load (module.js:445:3)
+    at Module.require (module.js:504:17)
+    at require (internal/module.js:20:19)
+    at Object.<anonymous> (C:\home\site\wwwroot\server.js:2:15)
+Thu Jan 29 2026 18:09:14 GMT+0000 (Coordinated Universal Time): Application has thrown an uncaught exception and is terminated:
+C:\home\site\wwwroot\node_modules\axios\dist\node\axios.cjs:1404
+  ...utils,
+  ^^^
+
+SyntaxError: Unexpected token ...
+    at createScript (vm.js:56:10)
+    at Object.runInThisContext (vm.js:97:10)
+    at Module._compile (module.js:549:28)
+    at Object.Module._extensions..js (module.js:586:10)
+    at Module.load (module.js:494:32)
+    at tryModuleLoad (module.js:453:12)
+    at Function.Module._load (module.js:445:3)
+    at Module.require (module.js:504:17)
+    at require (internal/module.js:20:19)
+    at Object.<anonymous> (C:\home\site\wwwroot\server.js:2:15)
+Thu Jan 29 2026 18:12:08 GMT+0000 (Coordinated Universal Time): Application has thrown an uncaught exception and is terminated:
+C:\home\site\wwwroot\node_modules\axios\dist\node\axios.cjs:1404
+  ...utils,
+  ^^^
+
+SyntaxError: Unexpected token ...
+    at createScript (vm.js:56:10)
+    at Object.runInThisContext (vm.js:97:10)
+    at Module._compile (module.js:549:28)
+    at Object.Module._extensions..js (module.js:586:10)
+    at Module.load (module.js:494:32)
+    at tryModuleLoad (module.js:453:12)
+    at Function.Module._load (module.js:445:3)
+    at Module.require (module.js:504:17)
+    at require (internal/module.js:20:19)
+    at Object.<anonymous> (C:\home\site\wwwroot\server.js:2:15)
+Thu Jan 29 2026 18:12:42 GMT+0000 (Coordinated Universal Time): Application has thrown an uncaught exception and is terminated:
+C:\home\site\wwwroot\node_modules\axios\dist\node\axios.cjs:1404
+  ...utils,
+  ^^^
+
+SyntaxError: Unexpected token ...
+    at createScript (vm.js:56:10)
+    at Object.runInThisContext (vm.js:97:10)
+    at Module._compile (module.js:549:28)
+    at Object.Module._extensions..js (module.js:586:10)
+    at Module.load (module.js:494:32)
+    at tryModuleLoad (module.js:453:12)
+    at Function.Module._load (module.js:445:3)
+    at Module.require (module.js:504:17)
+    at require (internal/module.js:20:19)
+    at Object.<anonymous> (C:\home\site\wwwroot\server.js:2:15)
+Thu Jan 29 2026 18:18:24 GMT+0000 (Coordinated Universal Time): Application has thrown an uncaught exception and is terminated:
+C:\home\site\wwwroot\node_modules\axios\dist\node\axios.cjs:1404
+  ...utils,
+  ^^^
+
+SyntaxError: Unexpected token ...
+    at createScript (vm.js:56:10)
+    at Object.runInThisContext (vm.js:97:10)
+    at Module._compile (module.js:549:28)
+    at Object.Module._extensions..js (module.js:586:10)
+    at Module.load (module.js:494:32)
+    at tryModuleLoad (module.js:453:12)
+    at Function.Module._load (module.js:445:3)
+    at Module.require (module.js:504:17)
+    at require (internal/module.js:20:19)
+    at Object.<anonymous> (C:\home\site\wwwroot\server.js:2:15)
+Thu Jan 29 2026 18:18:33 GMT+0000 (Coordinated Universal Time): Application has thrown an uncaught exception and is terminated:
+C:\home\site\wwwroot\node_modules\axios\dist\node\axios.cjs:1404
+  ...utils,
+  ^^^
+
+SyntaxError: Unexpected token ...
+    at createScript (vm.js:56:10)
+    at Object.runInThisContext (vm.js:97:10)
+    at Module._compile (module.js:549:28)
+    at Object.Module._extensions..js (module.js:586:10)
+    at Module.load (module.js:494:32)
+    at tryModuleLoad (module.js:453:12)
+    at Function.Module._load (module.js:445:3)
+    at Module.require (module.js:504:17)
+    at require (internal/module.js:20:19)
+    at Object.<anonymous> (C:\home\site\wwwroot\server.js:2:15)
+Thu Jan 29 2026 18:19:00 GMT+0000 (Coordinated Universal Time): Application has thrown an uncaught exception and is terminated:
+C:\home\site\wwwroot\node_modules\axios\dist\node\axios.cjs:1404
+  ...utils,
+  ^^^
+
+SyntaxError: Unexpected token ...
+    at createScript (vm.js:56:10)
+    at Object.runInThisContext (vm.js:97:10)
+    at Module._compile (module.js:549:28)
+    at Object.Module._extensions..js (module.js:586:10)
+    at Module.load (module.js:494:32)
+    at tryModuleLoad (module.js:453:12)
+    at Function.Module._load (module.js:445:3)
+    at Module.require (module.js:504:17)
+    at require (internal/module.js:20:19)
+    at Object.<anonymous> (C:\home\site\wwwroot\server.js:2:15)
+Thu Jan 29 2026 18:19:16 GMT+0000 (Coordinated Universal Time): Application has thrown an uncaught exception and is terminated:
+C:\home\site\wwwroot\node_modules\axios\dist\node\axios.cjs:1404
+  ...utils,
+  ^^^
+
+SyntaxError: Unexpected token ...
+    at createScript (vm.js:56:10)
+    at Object.runInThisContext (vm.js:97:10)
+    at Module._compile (module.js:549:28)
+    at Object.Module._extensions..js (module.js:586:10)
+    at Module.load (module.js:494:32)
+    at tryModuleLoad (module.js:453:12)
+    at Function.Module._load (module.js:445:3)
+    at Module.require (module.js:504:17)
+    at require (internal/module.js:20:19)
+    at Object.<anonymous> (C:\home\site\wwwroot\server.js:2:15)
+Thu Jan 29 2026 18:19:18 GMT+0000 (Coordinated Universal Time): Application has thrown an uncaught exception and is terminated:
+C:\home\site\wwwroot\node_modules\axios\dist\node\axios.cjs:1404
+  ...utils,
+  ^^^
+
+SyntaxError: Unexpected token ...
+    at createScript (vm.js:56:10)
+    at Object.runInThisContext (vm.js:97:10)
+    at Module._compile (module.js:549:28)
+    at Object.Module._extensions..js (module.js:586:10)
+    at Module.load (module.js:494:32)
+    at tryModuleLoad (module.js:453:12)
+    at Function.Module._load (module.js:445:3)
+    at Module.require (module.js:504:17)
+    at require (internal/module.js:20:19)
+    at Object.<anonymous> (C:\home\site\wwwroot\server.js:2:15)
+Thu Jan 29 2026 18:19:19 GMT+0000 (Coordinated Universal Time): Application has thrown an uncaught exception and is terminated:
+C:\home\site\wwwroot\node_modules\axios\dist\node\axios.cjs:1404
+  ...utils,
+  ^^^
+
+SyntaxError: Unexpected token ...
+    at createScript (vm.js:56:10)
+    at Object.runInThisContext (vm.js:97:10)
+    at Module._compile (module.js:549:28)
+    at Object.Module._extensions..js (module.js:586:10)
+    at Module.load (module.js:494:32)
+    at tryModuleLoad (module.js:453:12)
+    at Function.Module._load (module.js:445:3)
+    at Module.require (module.js:504:17)
+    at require (internal/module.js:20:19)
+    at Object.<anonymous> (C:\home\site\wwwroot\server.js:2:15)
+Thu Jan 29 2026 18:19:27 GMT+0000 (Coordinated Universal Time): Application has thrown an uncaught exception and is terminated:
+C:\home\site\wwwroot\node_modules\axios\dist\node\axios.cjs:1404
+  ...utils,
+  ^^^
+
+SyntaxError: Unexpected token ...
+    at createScript (vm.js:56:10)
+    at Object.runInThisContext (vm.js:97:10)
+    at Module._compile (module.js:549:28)
+    at Object.Module._extensions..js (module.js:586:10)
+    at Module.load (module.js:494:32)
+    at tryModuleLoad (module.js:453:12)
+    at Function.Module._load (module.js:445:3)
+    at Module.require (module.js:504:17)
+    at require (internal/module.js:20:19)
+    at Object.<anonymous> (C:\home\site\wwwroot\server.js:2:15)
+Thu Jan 29 2026 18:19:28 GMT+0000 (Coordinated Universal Time): Application has thrown an uncaught exception and is terminated:
+C:\home\site\wwwroot\node_modules\axios\dist\node\axios.cjs:1404
+  ...utils,
+  ^^^
+
+SyntaxError: Unexpected token ...
+    at createScript (vm.js:56:10)
+    at Object.runInThisContext (vm.js:97:10)
+    at Module._compile (module.js:549:28)
+    at Object.Module._extensions..js (module.js:586:10)
+    at Module.load (module.js:494:32)
+    at tryModuleLoad (module.js:453:12)
+    at Function.Module._load (module.js:445:3)
+    at Module.require (module.js:504:17)
+    at require (internal/module.js:20:19)
+    at Object.<anonymous> (C:\home\site\wwwroot\server.js:2:15)
+Thu Jan 29 2026 18:25:17 GMT+0000 (Coordinated Universal Time): Application has thrown an uncaught exception and is terminated:
+SyntaxError: Unexpected token {
+    at Module._compile (module.js:434:25)
+    at Object..js (module.js:464:10)
+    at Module.load (module.js:353:31)
+    at Function._load (module.js:311:12)
+    at Module.require (module.js:359:17)
+    at require (module.js:375:17)
+    at Object.<anonymous> (C:\Program Files (x86)\iisnode\interceptor.js:459:1)
+    at Module._compile (module.js:446:26)
+    at Object..js (module.js:464:10)
+    at Module.load (module.js:353:31)
+Thu Jan 29 2026 18:25:28 GMT+0000 (Coordinated Universal Time): Application has thrown an uncaught exception and is terminated:
+SyntaxError: Unexpected token {
+    at Module._compile (module.js:434:25)
+    at Object..js (module.js:464:10)
+    at Module.load (module.js:353:31)
+    at Function._load (module.js:311:12)
+    at Module.require (module.js:359:17)
+    at require (module.js:375:17)
+    at Object.<anonymous> (C:\Program Files (x86)\iisnode\interceptor.js:459:1)
+    at Module._compile (module.js:446:26)
+    at Object..js (module.js:464:10)
+    at Module.load (module.js:353:31)

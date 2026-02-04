@@ -1,0 +1,235 @@
+<step title="BackgroundTrace" date="2026-01-29T18:03:30.234" instance="22a7da" url="/api/zipdeploy" method="POST" >
+  <step title="Updating shutdown sentinel last write time" date="2026-01-29T18:03:30.250" SemaphoreCount="7" /><!-- duration: 0ms -->
+  <step title="LockFile &apos;C:\home\site\locks\deployments.lock&apos; acquired" date="2026-01-29T18:03:30.250" /><!-- duration: 0ms -->
+  <step title="Creating temporary deployment" date="2026-01-29T18:03:30.250" /><!-- duration: 31ms -->
+  <step title="Performing fetch based deployment" date="2026-01-29T18:03:30.281" >
+    <step title="Fetching changes." date="2026-01-29T18:03:30.328" /><!-- duration: 0ms -->
+    <step title="Starting LocalZipHandler" date="2026-01-29T18:03:30.343" /><!-- duration: 0ms -->
+    <step title="Cleaning up temp folders from previous zip deployments and extracting pushed zip file C:\local\Temp\zipdeploy\vuxzdvd4.zip (0.05 MB) to C:\local\Temp\zipdeploy\extracted" date="2026-01-29T18:03:30.359" /><!-- duration: 0ms -->
+    <step title="Cleaning up temp folders from previous zip deployments and extracting pushed zip file C:\local\Temp\zipdeploy\vuxzdvd4.zip (0.05 MB) to C:\local\Temp\zipdeploy\extracted" date="2026-01-29T18:03:30.359" >
+      <step title="Renaming extractTargetDirectory(C:\local\Temp\zipdeploy\extracted) to tempDirectory(C:\local\Temp\zipdeploy\jjz4wlid.4bt)" date="2026-01-29T18:03:30.359" /><!-- duration: 16ms -->
+      <step title="Extracting 29 entries to C:\local\Temp\zipdeploy\extracted directory" date="2026-01-29T18:03:30.375" >
+        <step title="Extracting to C:\local\Temp\zipdeploy\extracted\api\admin.js ..." date="2026-01-29T18:03:30.375" /><!-- duration: 16ms -->
+        <step title="Extracting to C:\local\Temp\zipdeploy\extracted\api\agora.js ..." date="2026-01-29T18:03:30.390" /><!-- duration: 0ms -->
+        <step title="Extracting to C:\local\Temp\zipdeploy\extracted\api\ai.js ..." date="2026-01-29T18:03:30.406" /><!-- duration: 0ms -->
+        <step title="Extracting to C:\local\Temp\zipdeploy\extracted\api\auth.js ..." date="2026-01-29T18:03:30.406" /><!-- duration: 0ms -->
+        <step title="Extracting to C:\local\Temp\zipdeploy\extracted\api\behavioral.js ..." date="2026-01-29T18:03:30.406" /><!-- duration: 0ms -->
+        <step title="Omitting extracting file traces ..." date="2026-01-29T18:03:30.406" /><!-- duration: 0ms -->
+        <step title="Extracting to C:\local\Temp\zipdeploy\extracted\frontend-prototype.html ..." date="2026-01-29T18:03:30.421" /><!-- duration: 0ms -->
+        <step title="Extracting to C:\local\Temp\zipdeploy\extracted\styles.css ..." date="2026-01-29T18:03:30.421" /><!-- duration: 16ms -->
+        <step title="Extracting to C:\local\Temp\zipdeploy\extracted\index.html ..." date="2026-01-29T18:03:30.437" /><!-- duration: 0ms -->
+        <step title="Extracting to C:\local\Temp\zipdeploy\extracted\.deployment ..." date="2026-01-29T18:03:30.437" /><!-- duration: 0ms -->
+        <step title="Extracting to C:\local\Temp\zipdeploy\extracted\deploy.sh ..." date="2026-01-29T18:03:30.437" /><!-- duration: 0ms -->
+      </step><!-- duration: 63ms -->
+    </step><!-- duration: 94ms -->
+    <step title="Before sending BuildRequestReceived status to /api/updatedeploystatus" date="2026-01-29T18:03:30.453" /><!-- duration: 0ms -->
+    <step title="DeploymentManager.Deploy(id:5125831bb9214c948ba72db6b252c62c)" date="2026-01-29T18:03:30.453" >
+      <step title="Collecting changeset information" date="2026-01-29T18:03:30.453" /><!-- duration: 16ms -->
+      <step title="Updating submodules" date="2026-01-29T18:03:30.468" >
+        <step title="Updating submodules." date="2026-01-29T18:03:30.484" /><!-- duration: 16ms -->
+      </step><!-- duration: 31ms -->
+      <step title="Preparing deployment for commit id &apos;5125831bb9&apos;." date="2026-01-29T18:03:30.515" /><!-- duration: 0ms -->
+      <step title="Determining deployment builder" date="2026-01-29T18:03:30.531" >
+        <step title="Builder is CustomBuilder" date="2026-01-29T18:03:30.531" /><!-- duration: 0ms -->
+      </step><!-- duration: 0ms -->
+      <step title="Copying SSH keys" date="2026-01-29T18:03:30.546" /><!-- duration: 0ms -->
+      <step title="Building" date="2026-01-29T18:03:30.546" >
+        <step title="Running custom deployment command..." date="2026-01-29T18:03:30.562" /><!-- duration: 0ms -->
+        <step title="Running deployment command..." date="2026-01-29T18:03:30.578" /><!-- duration: 0ms -->
+        <step title="Command: bash deploy.sh" date="2026-01-29T18:03:30.593" /><!-- duration: 0ms -->
+        <step title="Executing external process" date="2026-01-29T18:03:30.625" type="process" path="starter.cmd" arguments="bash deploy.sh" >
+          <step title="Installing dependencies..." date="2026-01-29T18:03:30.953" /><!-- duration: 16ms -->
+          <step title="npm WARN package.json engagesphere@0.1.0 No README.md file found!" date="2026-01-29T18:03:34.734" /><!-- duration: 0ms -->
+          <step title="npm http GET https://registry.npmjs.org/cors" date="2026-01-29T18:03:34.750" /><!-- duration: 16ms -->
+          <step title="npm http GET https://registry.npmjs.org/dotenv" date="2026-01-29T18:03:34.765" /><!-- duration: 0ms -->
+          <step title="npm http GET https://registry.npmjs.org/jsonwebtoken" date="2026-01-29T18:03:34.781" /><!-- duration: 0ms -->
+          <step title="npm http GET https://registry.npmjs.org/express" date="2026-01-29T18:03:34.781" /><!-- duration: 0ms -->
+          <step title="npm http GET https://registry.npmjs.org/ws" date="2026-01-29T18:03:34.781" /><!-- duration: 0ms -->
+          <step title="npm http GET https://registry.npmjs.org/axios" date="2026-01-29T18:03:34.781" /><!-- duration: 16ms -->
+          <step title="npm http GET https://registry.npmjs.org/cors" date="2026-01-29T18:03:44.765" /><!-- duration: 0ms -->
+          <step title="npm http GET https://registry.npmjs.org/jsonwebtoken" date="2026-01-29T18:03:44.765" /><!-- duration: 0ms -->
+          <step title="npm http GET https://registry.npmjs.org/express" date="2026-01-29T18:03:44.781" /><!-- duration: 0ms -->
+          <step title="npm http GET https://registry.npmjs.org/dotenv" date="2026-01-29T18:03:44.781" /><!-- duration: 0ms -->
+          <step title="npm http GET https://registry.npmjs.org/ws" date="2026-01-29T18:03:44.781" /><!-- duration: 0ms -->
+          <step title="npm http GET https://registry.npmjs.org/axios" date="2026-01-29T18:03:44.781" /><!-- duration: 0ms -->
+          <step title="npm http GET https://registry.npmjs.org/cors" date="2026-01-29T18:04:44.788" /><!-- duration: 0ms -->
+          <step title="npm http GET https://registry.npmjs.org/express" date="2026-01-29T18:04:44.788" /><!-- duration: 0ms -->
+          <step title="npm http GET https://registry.npmjs.org/jsonwebtoken" date="2026-01-29T18:04:44.788" /><!-- duration: 0ms -->
+          <step title="npm http GET https://registry.npmjs.org/ws" date="2026-01-29T18:04:44.803" /><!-- duration: 0ms -->
+          <step title="npm http GET https://registry.npmjs.org/dotenv" date="2026-01-29T18:04:44.803" /><!-- duration: 0ms -->
+          <step title="npm http GET https://registry.npmjs.org/axios" date="2026-01-29T18:04:44.803" /><!-- duration: 0ms -->
+          <step title="npm ERR! Error: 14804:error:1407742E:SSL routines:SSL23_GET_SERVER_HELLO:tlsv1 alert protocol version:openssl\ssl\s23_clnt.c:602:" date="2026-01-29T18:04:44.819" /><!-- duration: 0ms -->
+          <step title="npm ERR! " date="2026-01-29T18:04:44.819" /><!-- duration: 0ms -->
+          <step title="npm ERR!     at CleartextStream._puller (tls.js:501:24)" date="2026-01-29T18:04:44.819" /><!-- duration: 0ms -->
+          <step title="npm ERR!     at CleartextStream._pull (tls.js:432:19)" date="2026-01-29T18:04:44.835" /><!-- duration: 0ms -->
+          <step title="npm ERR!     at SecurePair.cycle (tls.js:727:20)" date="2026-01-29T18:04:44.835" /><!-- duration: 0ms -->
+          <step title="npm ERR!     at EncryptedStream.write (tls.js:130:13)" date="2026-01-29T18:04:44.835" /><!-- duration: 0ms -->
+          <step title="npm ERR!     at Socket.ondata (stream.js:38:26)" date="2026-01-29T18:04:44.850" /><!-- duration: 0ms -->
+          <step title="npm ERR!     at Socket.emit (events.js:67:17)" date="2026-01-29T18:04:44.850" /><!-- duration: 0ms -->
+          <step title="npm ERR!     at TCP.onread (net.js:367:14)" date="2026-01-29T18:04:44.850" /><!-- duration: 0ms -->
+          <step title="npm ERR!  [Error: 14804:error:1407742E:SSL routines:SSL23_GET_SERVER_HELLO:tlsv1 alert protocol version:openssl\ssl\s23_clnt.c:602:" date="2026-01-29T18:04:44.850" /><!-- duration: 16ms -->
+          <step title="npm ERR! ]" date="2026-01-29T18:04:44.866" /><!-- duration: 0ms -->
+          <step title="npm ERR! You may report this log at:" date="2026-01-29T18:04:44.866" /><!-- duration: 0ms -->
+          <step title="npm ERR!     &lt;http://github.com/isaacs/npm/issues&gt;" date="2026-01-29T18:04:44.866" /><!-- duration: 16ms -->
+          <step title="npm ERR! or email it to:" date="2026-01-29T18:04:44.882" /><!-- duration: 0ms -->
+          <step title="npm ERR!     &lt;npm-@googlegroups.com&gt;" date="2026-01-29T18:04:44.882" /><!-- duration: 0ms -->
+          <step title="npm ERR! System Windows_NT 6.2.9200" date="2026-01-29T18:04:44.882" /><!-- duration: 16ms -->
+          <step title="npm ERR! command &quot;C:\\Program Files (x86)\\nodejs\\node.exe&quot; &quot;C:\\Program Files (x86)\\nodejs\\node_modules\\npm\\bin\\npm-cli.js&quot; &quot;install&quot;" date="2026-01-29T18:04:44.897" /><!-- duration: 0ms -->
+          <step title="npm ERR! cwd C:\local\Temp\zipdeploy\extracted" date="2026-01-29T18:04:44.897" /><!-- duration: 0ms -->
+          <step title="npm ERR! node -v v0.6.20" date="2026-01-29T18:04:44.897" /><!-- duration: 16ms -->
+          <step title="npm ERR! npm -v 1.1.37" date="2026-01-29T18:04:44.913" /><!-- duration: 0ms -->
+          <step title="npm ERR! message 14804:error:1407742E:SSL routines:SSL23_GET_SERVER_HELLO:tlsv1 alert protocol version:openssl\ssl\s23_clnt.c:602:" date="2026-01-29T18:04:44.913" /><!-- duration: 0ms -->
+          <step title="npm ERR! message " date="2026-01-29T18:04:44.929" /><!-- duration: 0ms -->
+          <step title="Process dump" date="2026-01-29T18:04:44.929" exitCode="1" type="processOutput" /><!-- duration: 0ms -->
+        </step><!-- duration: 74304ms -->
+        <step title="npm" date="2026-01-29T18:04:44.929" /><!-- duration: 0ms -->
+        <step title="npm WARN package.json engagesphere@0.1.0 No README.md file found!
+npm http GET https://registry.npmjs.org/cors
+npm http GET https://registry.npmjs.org/dotenv
+npm http GET https://registry.npmjs.org/jsonwebtoken
+npm http GET https://registry.npmjs.org/express
+npm http GET https://registry.npmjs.org/ws
+npm http GET https://registry.npmjs.org/axios
+npm http GET https://registry.npmjs.org/cors
+npm http GET https://registry.npmjs.org/jsonwebtoken
+npm http GET https://registry.npmjs.org/express
+npm http GET https://registry.npmjs.org/dotenv
+npm http GET https://registry.npmjs.org/ws
+npm http GET https://registry.npmjs.org/axios
+npm http GET https://registry.npmjs.org/cors
+npm http GET https://registry.npmjs.org/express
+npm http GET https://registry.npmjs.org/jsonwebtoken
+npm http GET https://registry.npmjs.org/ws
+npm http GET https://registry.npmjs.org/dotenv
+npm http GET https://registry.npmjs.org/axios
+npm ERR! Error: 14804:error:1407742E:SSL routines:SSL23_GET_SERVER_HELLO:tlsv1 alert protocol version:openssl\ssl\s23_clnt.c:602:
+npm ERR! 
+npm ERR!     at CleartextStream._puller (tls.js:501:24)
+npm ERR!     at CleartextStream._pull (tls.js:432:19)
+npm ERR!     at SecurePair.cycle (tls.js:727:20)
+npm ERR!     at EncryptedStream.write (tls.js:130:13)
+npm ERR!     at Socket.ondata (stream.js:38:26)
+npm ERR!     at Socket.emit (events.js:67:17)
+npm ERR!     at TCP.onread (net.js:367:14)
+npm ERR!  [Error: 14804:error:1407742E:SSL routines:SSL23_GET_SERVER_HELLO:tlsv1 alert protocol version:openssl\ssl\s23_clnt.c:602:
+npm ERR! ]
+npm ERR! You may report this log at:
+npm ERR!     &lt;http://github.com/isaacs/npm/issues&gt;
+npm ERR! or email it to:
+npm ERR!     &lt;npm-@googlegroups.com&gt;
+
+npm ERR! System Windows_NT 6.2.9200
+npm ERR! command &quot;C:\\Program Files (x86)\\nodejs\\node.exe&quot; &quot;C:\\Program Files (x86)\\nodejs\\node_modules\\npm\\bin\\npm-cli.js&quot; &quot;install&quot;
+npm ERR! cwd C:\local\Temp\zipdeploy\extracted
+npm ERR! node -v v0.6.20
+npm ERR! npm -v 1.1.37
+npm ERR! message 14804:error:1407742E:SSL routines:SSL23_GET_SERVER_HELLO:tlsv1 alert protocol version:openssl\ssl\s23_clnt.c:602:
+npm ERR! message 
+npm
+C:\Program Files (x86)\SiteExtensions\Kudu\2025.11.1.1\bin\Scripts\starter.cmd bash deploy.sh DEPLOYMENTINFO: deploymentPath = ZipDeploy. Extract zip. Remote build. , deployer = ZipDeploy, os = windows, sku = Free, siteName = app-engagesphere, siteHostName = app-engagesphere.azurewebsites.net, deploymentStatus = Error" date="2026-01-29T18:04:44.944" /><!-- duration: 0ms -->
+        <step title="Error occurred" date="2026-01-29T18:04:44.944" type="error" text="npm WARN package.json engagesphere@0.1.0 No README.md file found!
+npm http GET https://registry.npmjs.org/cors
+npm http GET https://registry.npmjs.org/dotenv
+npm http GET https://registry.npmjs.org/jsonwebtoken
+npm http GET https://registry.npmjs.org/express
+npm http GET https://registry.npmjs.org/ws
+npm http GET https://registry.npmjs.org/axios
+npm http GET https://registry.npmjs.org/cors
+npm http GET https://registry.npmjs.org/jsonwebtoken
+npm http GET https://registry.npmjs.org/express
+npm http GET https://registry.npmjs.org/dotenv
+npm http GET https://registry.npmjs.org/ws
+npm http GET https://registry.npmjs.org/axios
+npm http GET https://registry.npmjs.org/cors
+npm http GET https://registry.npmjs.org/express
+npm http GET https://registry.npmjs.org/jsonwebtoken
+npm http GET https://registry.npmjs.org/ws
+npm http GET https://registry.npmjs.org/dotenv
+npm http GET https://registry.npmjs.org/axios
+npm ERR! Error: 14804:error:1407742E:SSL routines:SSL23_GET_SERVER_HELLO:tlsv1 alert protocol version:openssl\ssl\s23_clnt.c:602:
+npm ERR! 
+npm ERR!     at CleartextStream._puller (tls.js:501:24)
+npm ERR!     at CleartextStream._pull (tls.js:432:19)
+npm ERR!     at SecurePair.cycle (tls.js:727:20)
+npm ERR!     at EncryptedStream.write (tls.js:130:13)
+npm ERR!     at Socket.ondata (stream.js:38:26)
+npm ERR!     at Socket.emit (events.js:67:17)
+npm ERR!     at TCP.onread (net.js:367:14)
+npm ERR!  [Error: 14804:error:1407742E:SSL routines:SSL23_GET_SERVER_HELLO:tlsv1 alert protocol version:openssl\ssl\s23_clnt.c:602:
+npm ERR! ]
+npm ERR! You may report this log at:
+npm ERR!     &lt;http://github.com/isaacs/npm/issues&gt;
+npm ERR! or email it to:
+npm ERR!     &lt;npm-@googlegroups.com&gt;
+
+npm ERR! System Windows_NT 6.2.9200
+npm ERR! command &quot;C:\\Program Files (x86)\\nodejs\\node.exe&quot; &quot;C:\\Program Files (x86)\\nodejs\\node_modules\\npm\\bin\\npm-cli.js&quot; &quot;install&quot;
+npm ERR! cwd C:\local\Temp\zipdeploy\extracted
+npm ERR! node -v v0.6.20
+npm ERR! npm -v 1.1.37
+npm ERR! message 14804:error:1407742E:SSL routines:SSL23_GET_SERVER_HELLO:tlsv1 alert protocol version:openssl\ssl\s23_clnt.c:602:
+npm ERR! message 
+npm
+C:\Program Files (x86)\SiteExtensions\Kudu\2025.11.1.1\bin\Scripts\starter.cmd bash deploy.sh" stackTrace="   at Kudu.Core.Infrastructure.Executable.ExecuteInternal(ITracer tracer, Func`2 onWriteOutput, Func`2 onWriteError, Encoding encoding, String arguments, Object[] args)
+   at Kudu.Core.Infrastructure.Executable.ExecuteWithProgressWriter(ILogger logger, ITracer tracer, String arguments, Object[] args)
+   at Kudu.Core.Deployment.Generator.ExternalCommandBuilder.RunCommand(DeploymentContext context, String command, Boolean ignoreManifest, String message)" /><!-- duration: 0ms -->
+      </step><!-- duration: 74445ms -->
+      <step title="Error occurred" date="2026-01-29T18:04:44.991" type="error" text="npm WARN package.json engagesphere@0.1.0 No README.md file found!
+npm http GET https://registry.npmjs.org/cors
+npm http GET https://registry.npmjs.org/dotenv
+npm http GET https://registry.npmjs.org/jsonwebtoken
+npm http GET https://registry.npmjs.org/express
+npm http GET https://registry.npmjs.org/ws
+npm http GET https://registry.npmjs.org/axios
+npm http GET https://registry.npmjs.org/cors
+npm http GET https://registry.npmjs.org/jsonwebtoken
+npm http GET https://registry.npmjs.org/express
+npm http GET https://registry.npmjs.org/dotenv
+npm http GET https://registry.npmjs.org/ws
+npm http GET https://registry.npmjs.org/axios
+npm http GET https://registry.npmjs.org/cors
+npm http GET https://registry.npmjs.org/express
+npm http GET https://registry.npmjs.org/jsonwebtoken
+npm http GET https://registry.npmjs.org/ws
+npm http GET https://registry.npmjs.org/dotenv
+npm http GET https://registry.npmjs.org/axios
+npm ERR! Error: 14804:error:1407742E:SSL routines:SSL23_GET_SERVER_HELLO:tlsv1 alert protocol version:openssl\ssl\s23_clnt.c:602:
+npm ERR! 
+npm ERR!     at CleartextStream._puller (tls.js:501:24)
+npm ERR!     at CleartextStream._pull (tls.js:432:19)
+npm ERR!     at SecurePair.cycle (tls.js:727:20)
+npm ERR!     at EncryptedStream.write (tls.js:130:13)
+npm ERR!     at Socket.ondata (stream.js:38:26)
+npm ERR!     at Socket.emit (events.js:67:17)
+npm ERR!     at TCP.onread (net.js:367:14)
+npm ERR!  [Error: 14804:error:1407742E:SSL routines:SSL23_GET_SERVER_HELLO:tlsv1 alert protocol version:openssl\ssl\s23_clnt.c:602:
+npm ERR! ]
+npm ERR! You may report this log at:
+npm ERR!     &lt;http://github.com/isaacs/npm/issues&gt;
+npm ERR! or email it to:
+npm ERR!     &lt;npm-@googlegroups.com&gt;
+
+npm ERR! System Windows_NT 6.2.9200
+npm ERR! command &quot;C:\\Program Files (x86)\\nodejs\\node.exe&quot; &quot;C:\\Program Files (x86)\\nodejs\\node_modules\\npm\\bin\\npm-cli.js&quot; &quot;install&quot;
+npm ERR! cwd C:\local\Temp\zipdeploy\extracted
+npm ERR! node -v v0.6.20
+npm ERR! npm -v 1.1.37
+npm ERR! message 14804:error:1407742E:SSL routines:SSL23_GET_SERVER_HELLO:tlsv1 alert protocol version:openssl\ssl\s23_clnt.c:602:
+npm ERR! message 
+npm
+C:\Program Files (x86)\SiteExtensions\Kudu\2025.11.1.1\bin\Scripts\starter.cmd bash deploy.sh" stackTrace="   at Kudu.Core.Infrastructure.Executable.ExecuteInternal(ITracer tracer, Func`2 onWriteOutput, Func`2 onWriteError, Encoding encoding, String arguments, Object[] args)
+   at Kudu.Core.Infrastructure.Executable.ExecuteWithProgressWriter(ILogger logger, ITracer tracer, String arguments, Object[] args)
+   at Kudu.Core.Deployment.Generator.ExternalCommandBuilder.RunCommand(DeploymentContext context, String command, Boolean ignoreManifest, String message)
+   at Kudu.Core.Deployment.Generator.CustomBuilder.Build(DeploymentContext context)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.ValidateEnd(Task task)
+   at Kudu.Core.Deployment.DeploymentManager.&lt;Build&gt;d__38.MoveNext()" /><!-- duration: 0ms -->
+      <step title="Deployment Failed. DEPLOYMENTINFO: deploymentPath = ZipDeploy. Extract zip. Remote build. , deployer = ZipDeploy, os = windows, sku = Free, siteName = app-engagesphere, siteHostName = app-engagesphere.azurewebsites.net, deploymentStatus = Failed" date="2026-01-29T18:04:44.991" /><!-- duration: 0ms -->
+    </step><!-- duration: 74538ms -->
+    <step title="Cleaning up temp files" date="2026-01-29T18:04:45.007" /><!-- duration: 0ms -->
+  </step><!-- duration: 74726ms -->
+  <step title="LockFile &apos;C:\home\site\locks\deployments.lock&apos; released" date="2026-01-29T18:04:45.022" /><!-- duration: 0ms -->
+  <step title="Deleting shutdown sentinel file" date="2026-01-29T18:04:45.022" SemaphoreCount="8" /><!-- duration: 0ms -->
+</step><!-- duration: 74788ms -->

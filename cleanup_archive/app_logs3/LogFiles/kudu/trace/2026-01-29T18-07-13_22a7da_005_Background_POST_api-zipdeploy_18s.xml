@@ -1,0 +1,174 @@
+<step title="BackgroundTrace" date="2026-01-29T18:07:13.137" instance="22a7da" url="/api/zipdeploy" method="POST" >
+  <step title="Updating shutdown sentinel last write time" date="2026-01-29T18:07:13.137" SemaphoreCount="7" /><!-- duration: 0ms -->
+  <step title="LockFile &apos;C:\home\site\locks\deployments.lock&apos; acquired" date="2026-01-29T18:07:13.137" /><!-- duration: 0ms -->
+  <step title="Creating temporary deployment" date="2026-01-29T18:07:13.153" /><!-- duration: 0ms -->
+  <step title="Performing fetch based deployment" date="2026-01-29T18:07:13.153" >
+    <step title="Fetching changes." date="2026-01-29T18:07:13.184" /><!-- duration: 16ms -->
+    <step title="Starting LocalZipHandler" date="2026-01-29T18:07:13.200" /><!-- duration: 0ms -->
+    <step title="Cleaning up temp folders from previous zip deployments and extracting pushed zip file C:\local\Temp\zipdeploy\gzkoqmbe.zip (0.05 MB) to C:\local\Temp\zipdeploy\extracted" date="2026-01-29T18:07:13.215" /><!-- duration: 0ms -->
+    <step title="Cleaning up temp folders from previous zip deployments and extracting pushed zip file C:\local\Temp\zipdeploy\gzkoqmbe.zip (0.05 MB) to C:\local\Temp\zipdeploy\extracted" date="2026-01-29T18:07:13.215" >
+      <step title="Renaming extractTargetDirectory(C:\local\Temp\zipdeploy\extracted) to tempDirectory(C:\local\Temp\zipdeploy\ktoxoq00.vt5)" date="2026-01-29T18:07:13.215" /><!-- duration: 0ms -->
+      <step title="Extracting 27 entries to C:\local\Temp\zipdeploy\extracted directory" date="2026-01-29T18:07:13.231" >
+        <step title="Extracting to C:\local\Temp\zipdeploy\extracted\api\admin.js ..." date="2026-01-29T18:07:13.231" /><!-- duration: 16ms -->
+        <step title="Extracting to C:\local\Temp\zipdeploy\extracted\api\agora.js ..." date="2026-01-29T18:07:13.246" /><!-- duration: 0ms -->
+        <step title="Extracting to C:\local\Temp\zipdeploy\extracted\api\ai.js ..." date="2026-01-29T18:07:13.246" /><!-- duration: 16ms -->
+        <step title="Extracting to C:\local\Temp\zipdeploy\extracted\api\auth.js ..." date="2026-01-29T18:07:13.262" /><!-- duration: 0ms -->
+        <step title="Extracting to C:\local\Temp\zipdeploy\extracted\api\behavioral.js ..." date="2026-01-29T18:07:13.262" /><!-- duration: 0ms -->
+        <step title="Omitting extracting file traces ..." date="2026-01-29T18:07:13.262" /><!-- duration: 0ms -->
+        <step title="Extracting to C:\local\Temp\zipdeploy\extracted\package-lock.json ..." date="2026-01-29T18:07:13.278" /><!-- duration: 0ms -->
+        <step title="Extracting to C:\local\Temp\zipdeploy\extracted\package.json ..." date="2026-01-29T18:07:13.278" /><!-- duration: 16ms -->
+        <step title="Extracting to C:\local\Temp\zipdeploy\extracted\frontend-prototype.html ..." date="2026-01-29T18:07:13.293" /><!-- duration: 0ms -->
+        <step title="Extracting to C:\local\Temp\zipdeploy\extracted\styles.css ..." date="2026-01-29T18:07:13.293" /><!-- duration: 0ms -->
+        <step title="Extracting to C:\local\Temp\zipdeploy\extracted\index.html ..." date="2026-01-29T18:07:13.293" /><!-- duration: 0ms -->
+      </step><!-- duration: 62ms -->
+    </step><!-- duration: 94ms -->
+    <step title="Before sending BuildRequestReceived status to /api/updatedeploystatus" date="2026-01-29T18:07:13.309" /><!-- duration: 0ms -->
+    <step title="DeploymentManager.Deploy(id:497f876a2c644fa0b9d78adf684deeef)" date="2026-01-29T18:07:13.309" >
+      <step title="Collecting changeset information" date="2026-01-29T18:07:13.325" /><!-- duration: 0ms -->
+      <step title="Updating submodules" date="2026-01-29T18:07:13.340" >
+        <step title="Updating submodules." date="2026-01-29T18:07:13.356" /><!-- duration: 0ms -->
+      </step><!-- duration: 16ms -->
+      <step title="Preparing deployment for commit id &apos;497f876a2c&apos;." date="2026-01-29T18:07:13.371" /><!-- duration: 0ms -->
+      <step title="Determining deployment builder" date="2026-01-29T18:07:13.387" >
+        <step title="UseMSBuild16: True" date="2026-01-29T18:07:13.387" /><!-- duration: 16ms -->
+        <step title="Builder is NodeSiteBuilder" date="2026-01-29T18:07:13.418" /><!-- duration: 0ms -->
+      </step><!-- duration: 31ms -->
+      <step title="Copying SSH keys" date="2026-01-29T18:07:13.434" /><!-- duration: 0ms -->
+      <step title="Building" date="2026-01-29T18:07:13.434" >
+        <step title="Generating deployment script." date="2026-01-29T18:07:13.450" /><!-- duration: 0ms -->
+        <step title="Generating deployment script" date="2026-01-29T18:07:13.450" >
+          <step title="Using the following command to generate deployment script: &apos;azure site deploymentscript -y --no-dot-deployment -r &quot;C:\local\Temp\zipdeploy\extracted&quot; -o &quot;C:\home\site\deployments\tools&quot; --node --sitePath &quot;C:\local\Temp\zipdeploy\extracted&quot;&apos;." date="2026-01-29T18:07:13.496" /><!-- duration: 0ms -->
+          <step title="Executing external process" date="2026-01-29T18:07:13.496" type="process" path="starter.cmd" arguments="&quot;C:\Program Files (x86)\SiteExtensions\Kudu\2025.11.1.1\bin\node_modules\.bin\kuduscript.cmd&quot; -y --no-dot-deployment -r &quot;C:\local\Temp\zipdeploy\extracted&quot; -o &quot;C:\home\site\deployments\tools&quot; --node --sitePath &quot;C:\local\Temp\zipdeploy\extracted&quot;" >
+            <step title="Generating deployment script for node.js Web Site" date="2026-01-29T18:07:13.809" /><!-- duration: 0ms -->
+            <step title="Generated deployment script files" date="2026-01-29T18:07:13.825" /><!-- duration: 0ms -->
+          </step><!-- duration: 328ms -->
+          <step title="Saved cached version of the deployment script for command -y --no-dot-deployment -r &quot;C:\local\Temp\zipdeploy\extracted&quot; -o &quot;C:\home\site\deployments\tools&quot; --node --sitePath &quot;C:\local\Temp\zipdeploy\extracted&quot;" date="2026-01-29T18:07:13.825" /><!-- duration: 16ms -->
+        </step><!-- duration: 391ms -->
+        <step title="Running deployment command..." date="2026-01-29T18:07:13.856" /><!-- duration: 16ms -->
+        <step title="Command: &quot;C:\home\site\deployments\tools\deploy.cmd&quot;" date="2026-01-29T18:07:13.871" /><!-- duration: 0ms -->
+        <step title="Executing external process" date="2026-01-29T18:07:13.871" type="process" path="starter.cmd" arguments="&quot;C:\home\site\deployments\tools\deploy.cmd&quot;" >
+          <step title="Handling node.js deployment." date="2026-01-29T18:07:13.981" /><!-- duration: 0ms -->
+          <step title="Creating app_offline.htm" date="2026-01-29T18:07:14.075" /><!-- duration: 0ms -->
+          <step title="KuduSync.NET from: &apos;C:\local\Temp\zipdeploy\extracted&apos; to: &apos;C:\home\site\wwwroot&apos;" date="2026-01-29T18:07:14.075" /><!-- duration: 0ms -->
+          <step title="Deleting app_offline.htm" date="2026-01-29T18:07:14.075" /><!-- duration: 0ms -->
+          <step title="Using start-up script server.js from package.json." date="2026-01-29T18:07:14.309" /><!-- duration: 0ms -->
+          <step title="Generated web.config." date="2026-01-29T18:07:14.325" /><!-- duration: 0ms -->
+          <step title="The package.json file does not specify node.js engine version constraints." date="2026-01-29T18:07:14.325" /><!-- duration: 0ms -->
+          <step title="The node.js application will run with the default node.js version 6.9.1." date="2026-01-29T18:07:14.340" /><!-- duration: 0ms -->
+          <step title="Selected npm version 3.10.10" date="2026-01-29T18:07:14.340" /><!-- duration: 0ms -->
+          <step title="engagesphere@0.1.0 C:\home\site\wwwroot" date="2026-01-29T18:07:30.124" /><!-- duration: 16ms -->
+pm WARN ws@8.19.0 requires a peer of bufferutil@^4.0.1 but none was installed." date="2026-01-29T18:07:30.139" /><!-- duration: 0ms -->
+          <step title="+-- axios@1.13.4 " date="2026-01-29T18:07:30.139" /><!-- duration: 0ms -->
+>
+          <step title="npm WARN ws@8.19.0 requires a peer of utf-8-validate@&gt;=5.0.2 but none was installed." date="2026-01-29T18:07:30.139" /><!-- duration: 0ms -->
+>
+          <step title="| +-- follow-redirects@1.15.11 " date="2026-01-29T18:07:30.139" /><!-- duration: 16ms -->
+          <step title="| +-- form-data@4.0.5 " date="2026-01-29T18:07:30.155" /><!-- duration: 0ms -->
+          <step title="| | +-- asynckit@0.4.0 " date="2026-01-29T18:07:30.155" /><!-- duration: 0ms -->
+          <step title="| | +-- combined-stream@1.0.8 " date="2026-01-29T18:07:30.155" /><!-- duration: 16ms -->
+          <step title="| | | `-- delayed-stream@1.0.0 " date="2026-01-29T18:07:30.171" /><!-- duration: 0ms -->
+          <step title="| | +-- es-set-tostringtag@2.1.0 " date="2026-01-29T18:07:30.171" /><!-- duration: 0ms -->
+          <step title="| | | +-- es-errors@1.3.0 " date="2026-01-29T18:07:30.171" /><!-- duration: 0ms -->
+          <step title="| | | +-- get-intrinsic@1.3.0 " date="2026-01-29T18:07:30.186" /><!-- duration: 0ms -->
+          <step title="| | | | +-- call-bind-apply-helpers@1.0.2 " date="2026-01-29T18:07:30.186" /><!-- duration: 0ms -->
+          <step title="| | | | +-- es-define-property@1.0.1 " date="2026-01-29T18:07:30.186" /><!-- duration: 0ms -->
+          <step title="| | | | +-- es-object-atoms@1.1.1 " date="2026-01-29T18:07:30.202" /><!-- duration: 0ms -->
+          <step title="| | | | +-- get-proto@1.0.1 " date="2026-01-29T18:07:30.202" /><!-- duration: 0ms -->
+          <step title="| | | | | `-- dunder-proto@1.0.1 " date="2026-01-29T18:07:30.202" /><!-- duration: 0ms -->
+          <step title="| | | | +-- gopd@1.2.0 " date="2026-01-29T18:07:30.218" /><!-- duration: 0ms -->
+          <step title="| | | | +-- has-symbols@1.1.0 " date="2026-01-29T18:07:30.218" /><!-- duration: 0ms -->
+          <step title="| | | | `-- math-intrinsics@1.1.0 " date="2026-01-29T18:07:30.218" /><!-- duration: 0ms -->
+          <step title="| | | `-- has-tostringtag@1.0.2 " date="2026-01-29T18:07:30.233" /><!-- duration: 0ms -->
+          <step title="| | +-- hasown@2.0.2 " date="2026-01-29T18:07:30.233" /><!-- duration: 0ms -->
+          <step title="| | | `-- function-bind@1.1.2 " date="2026-01-29T18:07:30.233" /><!-- duration: 0ms -->
+          <step title="| | `-- mime-types@2.1.35 " date="2026-01-29T18:07:30.249" /><!-- duration: 0ms -->
+          <step title="| |   `-- mime-db@1.52.0 " date="2026-01-29T18:07:30.249" /><!-- duration: 0ms -->
+          <step title="| `-- proxy-from-env@1.1.0 " date="2026-01-29T18:07:30.249" /><!-- duration: 16ms -->
+          <step title="+-- UNMET PEER DEPENDENCY bufferutil@^4.0.1" date="2026-01-29T18:07:30.264" /><!-- duration: 0ms -->
+          <step title="+-- cors@2.8.6 " date="2026-01-29T18:07:30.264" /><!-- duration: 0ms -->
+          <step title="| +-- object-assign@4.1.1 " date="2026-01-29T18:07:30.264" /><!-- duration: 16ms -->
+          <step title="| `-- vary@1.1.2 " date="2026-01-29T18:07:30.280" /><!-- duration: 0ms -->
+          <step title="+-- dotenv@16.6.1 " date="2026-01-29T18:07:30.280" /><!-- duration: 0ms -->
+          <step title="+-- express@4.22.1 " date="2026-01-29T18:07:30.280" /><!-- duration: 16ms -->
+          <step title="| +-- accepts@1.3.8 " date="2026-01-29T18:07:30.296" /><!-- duration: 0ms -->
+          <step title="| | `-- negotiator@0.6.3 " date="2026-01-29T18:07:30.296" /><!-- duration: 0ms -->
+          <step title="| +-- array-flatten@1.1.1 " date="2026-01-29T18:07:30.296" /><!-- duration: 0ms -->
+          <step title="| +-- body-parser@1.20.4 " date="2026-01-29T18:07:30.311" /><!-- duration: 0ms -->
+          <step title="| | +-- bytes@3.1.2 " date="2026-01-29T18:07:30.311" /><!-- duration: 0ms -->
+          <step title="| | +-- destroy@1.2.0 " date="2026-01-29T18:07:30.311" /><!-- duration: 0ms -->
+          <step title="| | +-- iconv-lite@0.4.24 " date="2026-01-29T18:07:30.327" /><!-- duration: 0ms -->
+          <step title="| | | `-- safer-buffer@2.1.2 " date="2026-01-29T18:07:30.327" /><!-- duration: 0ms -->
+          <step title="| | +-- raw-body@2.5.3 " date="2026-01-29T18:07:30.327" /><!-- duration: 0ms -->
+          <step title="| | `-- unpipe@1.0.0 " date="2026-01-29T18:07:30.327" /><!-- duration: 16ms -->
+          <step title="| +-- content-disposition@0.5.4 " date="2026-01-29T18:07:30.343" /><!-- duration: 0ms -->
+          <step title="| +-- content-type@1.0.5 " date="2026-01-29T18:07:30.343" /><!-- duration: 0ms -->
+          <step title="| +-- cookie@0.7.2 " date="2026-01-29T18:07:30.343" /><!-- duration: 0ms -->
+          <step title="| +-- cookie-signature@1.0.7 " date="2026-01-29T18:07:30.358" /><!-- duration: 0ms -->
+          <step title="| +-- debug@2.6.9 " date="2026-01-29T18:07:30.358" /><!-- duration: 0ms -->
+          <step title="| | `-- ms@2.0.0 " date="2026-01-29T18:07:30.358" /><!-- duration: 0ms -->
+          <step title="| +-- depd@2.0.0 " date="2026-01-29T18:07:30.374" /><!-- duration: 0ms -->
+          <step title="| +-- encodeurl@2.0.0 " date="2026-01-29T18:07:30.374" /><!-- duration: 0ms -->
+          <step title="| +-- escape-html@1.0.3 " date="2026-01-29T18:07:30.374" /><!-- duration: 0ms -->
+          <step title="| +-- etag@1.8.1 " date="2026-01-29T18:07:30.374" /><!-- duration: 16ms -->
+          <step title="| +-- finalhandler@1.3.2 " date="2026-01-29T18:07:30.389" /><!-- duration: 0ms -->
+          <step title="| +-- fresh@0.5.2 " date="2026-01-29T18:07:30.389" /><!-- duration: 0ms -->
+          <step title="| +-- http-errors@2.0.1 " date="2026-01-29T18:07:30.389" /><!-- duration: 0ms -->
+          <step title="| | +-- inherits@2.0.4 " date="2026-01-29T18:07:30.405" /><!-- duration: 0ms -->
+          <step title="| | `-- toidentifier@1.0.1 " date="2026-01-29T18:07:30.405" /><!-- duration: 0ms -->
+          <step title="| +-- merge-descriptors@1.0.3 " date="2026-01-29T18:07:30.405" /><!-- duration: 0ms -->
+          <step title="| +-- methods@1.1.2 " date="2026-01-29T18:07:30.421" /><!-- duration: 0ms -->
+          <step title="| +-- on-finished@2.4.1 " date="2026-01-29T18:07:30.421" /><!-- duration: 0ms -->
+          <step title="| | `-- ee-first@1.1.1 " date="2026-01-29T18:07:30.421" /><!-- duration: 0ms -->
+          <step title="| +-- parseurl@1.3.3 " date="2026-01-29T18:07:30.421" /><!-- duration: 16ms -->
+          <step title="| +-- path-to-regexp@0.1.12 " date="2026-01-29T18:07:30.436" /><!-- duration: 0ms -->
+          <step title="| +-- proxy-addr@2.0.7 " date="2026-01-29T18:07:30.436" /><!-- duration: 0ms -->
+          <step title="| | +-- forwarded@0.2.0 " date="2026-01-29T18:07:30.436" /><!-- duration: 0ms -->
+          <step title="| | `-- ipaddr.js@1.9.1 " date="2026-01-29T18:07:30.452" /><!-- duration: 0ms -->
+          <step title="| +-- qs@6.14.1 " date="2026-01-29T18:07:30.452" /><!-- duration: 0ms -->
+          <step title="| | `-- side-channel@1.1.0 " date="2026-01-29T18:07:30.452" /><!-- duration: 0ms -->
+          <step title="| |   +-- object-inspect@1.13.4 " date="2026-01-29T18:07:30.452" /><!-- duration: 16ms -->
+          <step title="| |   +-- side-channel-list@1.0.0 " date="2026-01-29T18:07:30.468" /><!-- duration: 0ms -->
+          <step title="| |   +-- side-channel-map@1.0.1 " date="2026-01-29T18:07:30.468" /><!-- duration: 0ms -->
+          <step title="| |   | `-- call-bound@1.0.4 " date="2026-01-29T18:07:30.483" /><!-- duration: 0ms -->
+          <step title="| |   `-- side-channel-weakmap@1.0.2 " date="2026-01-29T18:07:30.483" /><!-- duration: 0ms -->
+          <step title="| +-- range-parser@1.2.1 " date="2026-01-29T18:07:30.483" /><!-- duration: 0ms -->
+          <step title="| +-- safe-buffer@5.2.1 " date="2026-01-29T18:07:30.483" /><!-- duration: 16ms -->
+          <step title="| +-- send@0.19.2 " date="2026-01-29T18:07:30.499" /><!-- duration: 0ms -->
+          <step title="| | +-- mime@1.6.0 " date="2026-01-29T18:07:30.499" /><!-- duration: 0ms -->
+          <step title="| | `-- ms@2.1.3 " date="2026-01-29T18:07:30.499" /><!-- duration: 16ms -->
+          <step title="| +-- serve-static@1.16.3 " date="2026-01-29T18:07:30.514" /><!-- duration: 0ms -->
+          <step title="| +-- setprototypeof@1.2.0 " date="2026-01-29T18:07:30.514" /><!-- duration: 0ms -->
+          <step title="| +-- statuses@2.0.2 " date="2026-01-29T18:07:30.514" /><!-- duration: 0ms -->
+          <step title="| +-- type-is@1.6.18 " date="2026-01-29T18:07:30.530" /><!-- duration: 0ms -->
+          <step title="| | `-- media-typer@0.3.0 " date="2026-01-29T18:07:30.530" /><!-- duration: 0ms -->
+          <step title="| `-- utils-merge@1.0.1 " date="2026-01-29T18:07:30.530" /><!-- duration: 0ms -->
+          <step title="+-- jsonwebtoken@9.0.3 " date="2026-01-29T18:07:30.546" /><!-- duration: 0ms -->
+          <step title="| +-- jws@4.0.1 " date="2026-01-29T18:07:30.546" /><!-- duration: 0ms -->
+          <step title="| | `-- jwa@2.0.1 " date="2026-01-29T18:07:30.546" /><!-- duration: 0ms -->
+          <step title="| |   +-- buffer-equal-constant-time@1.0.1 " date="2026-01-29T18:07:30.561" /><!-- duration: 0ms -->
+          <step title="| |   `-- ecdsa-sig-formatter@1.0.11 " date="2026-01-29T18:07:30.561" /><!-- duration: 0ms -->
+          <step title="| +-- lodash.includes@4.3.0 " date="2026-01-29T18:07:30.561" /><!-- duration: 0ms -->
+          <step title="| +-- lodash.isboolean@3.0.3 " date="2026-01-29T18:07:30.561" /><!-- duration: 16ms -->
+          <step title="| +-- lodash.isinteger@4.0.4 " date="2026-01-29T18:07:30.577" /><!-- duration: 0ms -->
+          <step title="| +-- lodash.isnumber@3.0.3 " date="2026-01-29T18:07:30.577" /><!-- duration: 0ms -->
+          <step title="| +-- lodash.isplainobject@4.0.6 " date="2026-01-29T18:07:30.577" /><!-- duration: 16ms -->
+          <step title="| +-- lodash.isstring@4.0.1 " date="2026-01-29T18:07:30.593" /><!-- duration: 0ms -->
+          <step title="| +-- lodash.once@4.1.1 " date="2026-01-29T18:07:30.593" /><!-- duration: 0ms -->
+          <step title="| +-- ms@2.1.3 " date="2026-01-29T18:07:30.593" /><!-- duration: 16ms -->
+          <step title="| `-- semver@7.7.3 " date="2026-01-29T18:07:30.608" /><!-- duration: 0ms -->
+          <step title="+-- UNMET PEER DEPENDENCY utf-8-validate@&gt;=5.0.2" date="2026-01-29T18:07:30.608" /><!-- duration: 0ms -->
+          <step title="`-- ws@8.19.0 " date="2026-01-29T18:07:30.608" /><!-- duration: 16ms -->
+          <step title="Finished successfully." date="2026-01-29T18:07:30.624" /><!-- duration: 0ms -->
+        </step><!-- duration: 16752ms -->
+        <step title="Running post deployment command(s)..." date="2026-01-29T18:07:30.639" /><!-- duration: 0ms -->
+        <step title="Triggering recycle (preview mode disabled)." date="2026-01-29T18:07:30.671" /><!-- duration: 0ms -->
+        <step title="Ignoring FS watcher based recycle request as this is a classic Windows app." date="2026-01-29T18:07:30.671" /><!-- duration: 0ms -->
+        <step title="Deployment successful. DEPLOYMENTINFO: deploymentPath = ZipDeploy. Extract zip. Remote build. , deployer = ZipDeploy, os = windows, sku = Free, siteName = app-engagesphere, siteHostName = app-engagesphere.azurewebsites.net, deploymentStatus = Success" date="2026-01-29T18:07:30.686" /><!-- duration: 0ms -->
+      </step><!-- duration: 17299ms -->
+    </step><!-- duration: 17440ms -->
+    <step title="Cleaning up temp files" date="2026-01-29T18:07:30.749" /><!-- duration: 0ms -->
+    <step title="Skip function trigger and logicapp sync because function is not enabled." date="2026-01-29T18:07:30.749" /><!-- duration: 0ms -->
+  </step><!-- duration: 17612ms -->
+  <step title="LockFile &apos;C:\home\site\locks\deployments.lock&apos; released" date="2026-01-29T18:07:30.764" /><!-- duration: 0ms -->
+  <step title="Deleting shutdown sentinel file" date="2026-01-29T18:07:30.764" SemaphoreCount="8" /><!-- duration: 0ms -->
+</step><!-- duration: 17627ms -->

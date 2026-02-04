@@ -1,0 +1,111 @@
+<step title="BackgroundTrace" date="2026-01-25T21:32:24.640" instance="22a7da" url="/api/zipdeploy" method="POST" >
+  <step title="Cleanup Xml Logs" date="2026-01-25T21:32:24.640" /><!-- duration: 0ms -->
+  <step title="Updating shutdown sentinel last write time" date="2026-01-25T21:32:24.655" SemaphoreCount="7" /><!-- duration: 0ms -->
+  <step title="LockFile &apos;C:\home\site\locks\deployments.lock&apos; acquired" date="2026-01-25T21:32:24.655" /><!-- duration: 0ms -->
+  <step title="Creating temporary deployment" date="2026-01-25T21:32:24.655" /><!-- duration: 16ms -->
+  <step title="Performing fetch based deployment" date="2026-01-25T21:32:24.671" >
+    <step title="Fetching changes." date="2026-01-25T21:32:24.718" /><!-- duration: 0ms -->
+    <step title="Starting LocalZipHandler" date="2026-01-25T21:32:24.718" /><!-- duration: 0ms -->
+    <step title="Cleaning up temp folders from previous zip deployments and extracting pushed zip file C:\local\Temp\zipdeploy\t1wfw1rm.zip (107.48 MB) to C:\local\Temp\zipdeploy\extracted" date="2026-01-25T21:32:24.734" /><!-- duration: 0ms -->
+    <step title="Cleaning up temp folders from previous zip deployments and extracting pushed zip file C:\local\Temp\zipdeploy\t1wfw1rm.zip (107.48 MB) to C:\local\Temp\zipdeploy\extracted" date="2026-01-25T21:32:24.734" >
+      <step title="Renaming extractTargetDirectory(C:\local\Temp\zipdeploy\extracted) to tempDirectory(C:\local\Temp\zipdeploy\eu5a3mmu.eyq)" date="2026-01-25T21:32:24.734" /><!-- duration: 16ms -->
+      <step title="Extracting 281 entries to C:\local\Temp\zipdeploy\extracted directory" date="2026-01-25T21:32:24.749" >
+        <step title="Extracting to C:\local\Temp\zipdeploy\extracted\.env.example ..." date="2026-01-25T21:32:24.749" /><!-- duration: 0ms -->
+        <step title="Extracting to C:\local\Temp\zipdeploy\extracted\.git\COMMIT_EDITMSG ..." date="2026-01-25T21:32:24.749" /><!-- duration: 0ms -->
+        <step title="Extracting to C:\local\Temp\zipdeploy\extracted\.git\FETCH_HEAD ..." date="2026-01-25T21:32:24.765" /><!-- duration: 0ms -->
+        <step title="Extracting to C:\local\Temp\zipdeploy\extracted\.git\HEAD ..." date="2026-01-25T21:32:24.765" /><!-- duration: 0ms -->
+        <step title="Extracting to C:\local\Temp\zipdeploy\extracted\.git\ORIG_HEAD ..." date="2026-01-25T21:32:24.765" /><!-- duration: 0ms -->
+        <step title="Omitting extracting file traces ..." date="2026-01-25T21:32:24.780" /><!-- duration: 0ms -->
+        <step title="Extracting to C:\local\Temp\zipdeploy\extracted\scripts\scan-secrets.ps1 ..." date="2026-01-25T21:32:26.327" /><!-- duration: 16ms -->
+        <step title="Extracting to C:\local\Temp\zipdeploy\extracted\secrets-scan.json ..." date="2026-01-25T21:32:26.343" /><!-- duration: 0ms -->
+        <step title="Extracting to C:\local\Temp\zipdeploy\extracted\security\gitleaks-report.json ..." date="2026-01-25T21:32:26.343" /><!-- duration: 0ms -->
+        <step title="Extracting to C:\local\Temp\zipdeploy\extracted\server.js ..." date="2026-01-25T21:32:26.343" /><!-- duration: 16ms -->
+        <step title="Extracting to C:\local\Temp\zipdeploy\extracted\styles.css ..." date="2026-01-25T21:32:26.358" /><!-- duration: 0ms -->
+      </step><!-- duration: 1609ms -->
+    </step><!-- duration: 1625ms -->
+    <step title="Before sending BuildRequestReceived status to /api/updatedeploystatus" date="2026-01-25T21:32:26.374" /><!-- duration: 0ms -->
+    <step title="DeploymentManager.Deploy(id:17bc8bc09824487d84b9ee65606d063b)" date="2026-01-25T21:32:26.374" >
+      <step title="Collecting changeset information" date="2026-01-25T21:32:26.374" /><!-- duration: 31ms -->
+      <step title="Updating submodules" date="2026-01-25T21:32:26.405" >
+        <step title="Updating submodules." date="2026-01-25T21:32:26.421" /><!-- duration: 0ms -->
+      </step><!-- duration: 16ms -->
+      <step title="Preparing deployment for commit id &apos;17bc8bc098&apos;." date="2026-01-25T21:32:26.452" /><!-- duration: 0ms -->
+      <step title="Determining deployment builder" date="2026-01-25T21:32:26.468" >
+        <step title="Builder is BasicBuilder" date="2026-01-25T21:32:26.468" /><!-- duration: 0ms -->
+      </step><!-- duration: 0ms -->
+      <step title="Copying SSH keys" date="2026-01-25T21:32:26.483" /><!-- duration: 0ms -->
+      <step title="Building" date="2026-01-25T21:32:26.483" >
+        <step title="Generating deployment script." date="2026-01-25T21:32:26.515" /><!-- duration: 0ms -->
+        <step title="Generating deployment script" date="2026-01-25T21:32:26.515" >
+          <step title="Using cached version of the deployment script for command: -y --no-dot-deployment -r &quot;C:\local\Temp\zipdeploy\extracted&quot; -o &quot;C:\home\site\deployments\tools&quot; --basic --sitePath &quot;C:\local\Temp\zipdeploy\extracted&quot;" date="2026-01-25T21:32:26.530" /><!-- duration: 0ms -->
+          <step title="Using cached version of deployment script (command: &apos;azure -y --no-dot-deployment -r &quot;C:\local\Temp\zipdeploy\extracted&quot; -o &quot;C:\home\site\deployments\tools&quot; --basic --sitePath &quot;C:\local\Temp\zipdeploy\extracted&quot;&apos;)." date="2026-01-25T21:32:26.530" /><!-- duration: 0ms -->
+        </step><!-- duration: 16ms -->
+        <step title="Running deployment command..." date="2026-01-25T21:32:26.562" /><!-- duration: 0ms -->
+        <step title="Command: &quot;C:\home\site\deployments\tools\deploy.cmd&quot;" date="2026-01-25T21:32:26.562" /><!-- duration: 16ms -->
+        <step title="Executing external process" date="2026-01-25T21:32:26.577" type="process" path="starter.cmd" arguments="&quot;C:\home\site\deployments\tools\deploy.cmd&quot;" >
+          <step title="Handling Basic Web Site deployment." date="2026-01-25T21:32:26.671" /><!-- duration: 0ms -->
+          <step title="Creating app_offline.htm" date="2026-01-25T21:32:27.140" /><!-- duration: 0ms -->
+          <step title="KuduSync.NET from: &apos;C:\local\Temp\zipdeploy\extracted&apos; to: &apos;C:\home\site\wwwroot&apos;" date="2026-01-25T21:32:27.155" /><!-- duration: 0ms -->
+          <step title="Copying file: &apos;.env.example&apos;" date="2026-01-25T21:32:27.155" /><!-- duration: 0ms -->
+          <step title="Copying file: &apos;.gitignore&apos;" date="2026-01-25T21:32:27.155" /><!-- duration: 0ms -->
+          <step title="Copying file: &apos;ACCESSIBILITY.md&apos;" date="2026-01-25T21:32:27.171" /><!-- duration: 0ms -->
+          <step title="Copying file: &apos;azd-installer.msi&apos;" date="2026-01-25T21:32:27.171" /><!-- duration: 0ms -->
+          <step title="Copying file: &apos;azd-latest.zip&apos;" date="2026-01-25T21:32:27.171" /><!-- duration: 16ms -->
+          <step title="Copying file: &apos;azd.zip&apos;" date="2026-01-25T21:32:27.187" /><!-- duration: 0ms -->
+          <step title="Copying file: &apos;azure.yaml&apos;" date="2026-01-25T21:32:27.187" /><!-- duration: 0ms -->
+          <step title="Copying file: &apos;backend main.py&apos;" date="2026-01-25T21:32:27.187" /><!-- duration: 16ms -->
+          <step title="Copying file: &apos;bicep.exe&apos;" date="2026-01-25T21:32:27.202" /><!-- duration: 0ms -->
+          <step title="Copying file: &apos;body {.css&apos;" date="2026-01-25T21:32:27.202" /><!-- duration: 0ms -->
+          <step title="Copying file: &apos;ci-sbom-sca-release.yml&apos;" date="2026-01-25T21:32:27.202" /><!-- duration: 16ms -->
+          <step title="Copying file: &apos;CODE_OF_CONDUCT.md&apos;" date="2026-01-25T21:32:27.218" /><!-- duration: 0ms -->
+          <step title="Copying file: &apos;CONTRIBUTING.md&apos;" date="2026-01-25T21:32:27.218" /><!-- duration: 0ms -->
+          <step title="Copying file: &apos;external-multiplatform-stream.js&apos;" date="2026-01-25T21:32:27.218" /><!-- duration: 16ms -->
+          <step title="Copying file: &apos;from fastapi import FastAPI.py&apos;" date="2026-01-25T21:32:27.233" /><!-- duration: 0ms -->
+          <step title="Copying file: &apos;frontend script.js&apos;" date="2026-01-25T21:32:27.233" /><!-- duration: 0ms -->
+          <step title="Copying file: &apos;frontend-prototype.html&apos;" date="2026-01-25T21:32:27.249" /><!-- duration: 0ms -->
+          <step title="Copying file: &apos;index.html&apos;" date="2026-01-25T21:32:27.249" /><!-- duration: 0ms -->
+          <step title="Copying file: &apos;LEGAL.md&apos;" date="2026-01-25T21:32:27.249" /><!-- duration: 0ms -->
+          <step title="Copying file: &apos;LICENSE&apos;" date="2026-01-25T21:32:27.265" /><!-- duration: 0ms -->
+          <step title="Copying file: &apos;node-installer.msi&apos;" date="2026-01-25T21:32:27.265" /><!-- duration: 0ms -->
+          <step title="Copying file: &apos;NOTICE&apos;" date="2026-01-25T21:32:27.265" /><!-- duration: 16ms -->
+          <step title="Copying file: &apos;OpenAPI (Swagger).yml&apos;" date="2026-01-25T21:32:27.280" /><!-- duration: 0ms -->
+          <step title="Copying file: &apos;package-lock.json&apos;" date="2026-01-25T21:32:27.280" /><!-- duration: 0ms -->
+          <step title="Copying file: &apos;package.json&apos;" date="2026-01-25T21:32:27.280" /><!-- duration: 16ms -->
+          <step title="Copying file: &apos;PUBLISH.md&apos;" date="2026-01-25T21:32:27.296" /><!-- duration: 0ms -->
+          <step title="Copying file: &apos;README.md&apos;" date="2026-01-25T21:32:27.296" /><!-- duration: 0ms -->
+          <step title="Copying file: &apos;script.js&apos;" date="2026-01-25T21:32:27.296" /><!-- duration: 16ms -->
+          <step title="Copying file: &apos;secrets-scan.json&apos;" date="2026-01-25T21:32:27.312" /><!-- duration: 0ms -->
+          <step title="Copying file: &apos;SECURITY.md&apos;" date="2026-01-25T21:32:27.312" /><!-- duration: 0ms -->
+          <step title="Copying file: &apos;SECURITY_AND_COMPLIANCE.md&apos;" date="2026-01-25T21:32:27.312" /><!-- duration: 16ms -->
+          <step title="Copying file: &apos;server.js&apos;" date="2026-01-25T21:32:27.327" /><!-- duration: 0ms -->
+          <step title="Copying file: &apos;styles.css&apos;" date="2026-01-25T21:32:27.327" /><!-- duration: 0ms -->
+          <step title="Copying file: &apos;TESTING.md&apos;" date="2026-01-25T21:32:27.343" /><!-- duration: 0ms -->
+          <step title="Copying file: &apos;.github\CODEOWNERS&apos;" date="2026-01-25T21:32:27.343" /><!-- duration: 0ms -->
+          <step title="Copying file: &apos;.github\workflows\ci.yml&apos;" date="2026-01-25T21:32:27.343" /><!-- duration: 0ms -->
+          <step title="Copying file: &apos;.github\workflows\codeql.yml&apos;" date="2026-01-25T21:32:27.358" /><!-- duration: 0ms -->
+          <step title="Copying file: &apos;.github\workflows\error-collector.yml&apos;" date="2026-01-25T21:32:27.358" /><!-- duration: 0ms -->
+          <step title="Copying file: &apos;.github\workflows\gitleaks.yml&apos;" date="2026-01-25T21:32:27.358" /><!-- duration: 0ms -->
+          <step title="Copying file: &apos;.github\workflows\pages-health-check.yml&apos;" date="2026-01-25T21:32:27.374" /><!-- duration: 0ms -->
+          <step title="Copying file: &apos;.github\workflows\publish.yml&apos;" date="2026-01-25T21:32:27.374" /><!-- duration: 0ms -->
+          <step title="Copying file: &apos;.github\workflows\release.yml&apos;" date="2026-01-25T21:32:27.374" /><!-- duration: 0ms -->
+          <step title="Copying file: &apos;.vs\ProjectSettings.json&apos;" date="2026-01-25T21:32:27.390" /><!-- duration: 0ms -->
+          <step title="Copying file: &apos;.vs\slnx.sqlite&apos;" date="2026-01-25T21:32:27.390" /><!-- duration: 0ms -->
+          <step title="Copying file: &apos;.vs\VSWorkspaceState.json&apos;" date="2026-01-25T21:32:27.390" /><!-- duration: 0ms -->
+          <step title="Copying file: &apos;.vs\CopilotSnapshots\EEA14EFC7F773D44B0A46F4B6FF64D2A\state.mpack&apos;" date="2026-01-25T21:32:27.405" /><!-- duration: 0ms -->
+          <step title="Copying file: &apos;.vs\CopilotSnapshots\EEA14EFC7F773D44B0A46F4B6FF64D2A\41B20446F7BACA489178114C14B1EBD3\8BDF54D78303C1DC7274F2718D6A4160&apos;" date="2026-01-25T21:32:27.405" /><!-- duration: 0ms -->
+          <step title="Copying file: &apos;.vs\CopilotSnapshots\EEA14EFC7F773D44B0A46F4B6FF64D2A\41B20446F7BACA489178114C14B1EBD3\AE3019499D449DC44B7BF8A14A7652F9&apos;" date="2026-01-25T21:32:27.437" /><!-- duration: 0ms -->
+          <step title="Omitting next output lines..." date="2026-01-25T21:32:27.437" /><!-- duration: 156ms -->
+          <step title="Finished successfully." date="2026-01-25T21:32:27.999" /><!-- duration: 16ms -->
+        </step><!-- duration: 1438ms -->
+        <step title="Running post deployment command(s)..." date="2026-01-25T21:32:28.031" /><!-- duration: 0ms -->
+        <step title="Triggering recycle (preview mode disabled)." date="2026-01-25T21:32:28.046" /><!-- duration: 0ms -->
+        <step title="Ignoring FS watcher based recycle request as this is a classic Windows app." date="2026-01-25T21:32:28.062" /><!-- duration: 0ms -->
+        <step title="Deployment successful. DEPLOYMENTINFO: deploymentPath = ZipDeploy. Extract zip. , deployer = ZipDeploy, os = windows, sku = Free, siteName = app-engagesphere, siteHostName = app-engagesphere.azurewebsites.net, deploymentStatus = Success" date="2026-01-25T21:32:28.077" /><!-- duration: 0ms -->
+      </step><!-- duration: 1641ms -->
+    </step><!-- duration: 1750ms -->
+    <step title="Cleaning up temp files" date="2026-01-25T21:32:28.124" /><!-- duration: 0ms -->
+    <step title="Skip function trigger and logicapp sync because function is not enabled." date="2026-01-25T21:32:28.140" /><!-- duration: 0ms -->
+  </step><!-- duration: 3485ms -->
+  <step title="LockFile &apos;C:\home\site\locks\deployments.lock&apos; released" date="2026-01-25T21:32:28.156" /><!-- duration: 0ms -->
+  <step title="Deleting shutdown sentinel file" date="2026-01-25T21:32:28.156" SemaphoreCount="8" /><!-- duration: 0ms -->
+</step><!-- duration: 3531ms -->
